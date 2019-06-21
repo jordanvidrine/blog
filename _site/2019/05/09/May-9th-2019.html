@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 9th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 9th 2019</h1>
+<p>
+  09 May 2019
+  
+  
+<h1 id="5-9-19">5-9-19</h1>
+<p>Today was an office day at my day job. On my breaks I looked more into github and how to create a repository using Git Bash on windows. I created the <a href="https://github.com/jordanvidrine/coding-journey">coding-journey</a> repository on my work pc and documented the work I completed on 5-8-19.</p>
+
+<p>I also learned how to clone a repository on my home computer, allowing me to update this log from whatever computer I am working from.</p>
+
+<h2 id="creating-repository">Creating Repository</h2>
+<ol>
+  <li>Create a new reposity on Github (do not initialize with README)</li>
+  <li>Using Git Bash, cd to the directory you want the repository to live in and initialize
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git init
+</code></pre></div>    </div>
+  </li>
+  <li>Add the files in your directory. (stages for the first commit)
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add .
+# Adds the files in the local repository and stages them for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
+</code></pre></div>    </div>
+  </li>
+  <li>Commit the files you’ve added
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit -m "First Commit"
+# Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
+</code></pre></div>    </div>
+  </li>
+  <li>Using the repository link from github, add it as the remote origin
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add origin remote repository URL
+# Sets the new remote
+$ git remote -v
+# Verifies the new remote URL
+</code></pre></div>    </div>
+  </li>
+  <li>Ready to push the changes
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push origin master
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="cloning-repository">Cloning Repository</h2>
+<ol>
+  <li>cd to the folder you want your repository directory to be created in and run
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone (repository url) [name for repository folder to create]
+##[name...] is optional if you want the folder to be named something different than the repository name
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="pushing--fetching">Pushing &amp; Fetching</h2>
+<ol>
+  <li>Pushing : After staging and comitting the files yo push run the following command:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin [branch goes here]
+</code></pre></div>    </div>
+  </li>
+  <li>Fetching: If you used git clone, you can fetch any edited or new files with the following:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin [branch goes here]
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="continue-to-05-10-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-10-19.md">Continue to 05-10-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

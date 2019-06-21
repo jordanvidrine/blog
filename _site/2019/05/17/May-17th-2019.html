@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 17th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 17th 2019</h1>
+<p>
+  17 May 2019
+  
+  
+<h1 id="05-17-19">05-17-19</h1>
+<p>My schedule was all out of whack this week due to lots of financial meetings at work. That aside, I still got my coding hours in dispersed here and there.</p>
+
+<p>I finished up the exercises for Eloquent Javascript ch 6. And also read through Chapter 7. I will definitely have to re-read chapter 7. Although I understood most of it, another read through will solidify the concepts.</p>
+
+<h3 id="groups--your-own-symboliterator">Groups + Your Own Symbol.iterator</h3>
+<p>Make the Group class from the previous exercise iterable. Refer to the section about the iterator interface earlier in the chapter if you aren’t clear on the exact form of the interface anymore.</p>
+
+<p>If you used an array to represent the group’s members, don’t just return the iterator created by calling the Symbol.iterator method on the array. That would work, but it defeats the purpose of this exercise.</p>
+
+<p>It is okay if your iterator behaves strangely when the group is modified during iteration.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Group {
+    constructor() {
+        this.items = [];
+    }
+
+    add(value) {
+        if (!this.has(value)) {
+        this.items.push(value);
+        }
+    }
+    delete(value) {
+        if (this.has(value)) {
+            this.items = this.items.filter(v =&gt; v !== value)
+        }
+    }
+    has(value) {
+        if (this.items.indexOf(value) !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    static from(object){
+        let group = new Group;
+        for (let values of object){
+            group.add(values);
+        }
+        return group;
+    }
+
+}
+
+class GroupIterator {
+    constructor(group) {
+        this.group = group;
+        this.count = 0
+    }
+
+    next() {
+        if(this.count &gt;= this.group.items.length) return {done: true}
+
+        let value = this.group.items[this.count]
+        this.count++;
+
+        return {value, done: false}
+    }
+}
+
+for (let value of Group.from(["a", "b", "c"])) {
+  console.log(value);
+}
+// → a
+// → b
+// → c
+</code></pre></div></div>
+
+<h3 id="borrowing-a-method">Borrowing a method</h3>
+
+<p>Earlier in the chapter I mentioned that an object’s hasOwnProperty can be used as a more robust alternative to the in operator when you want to ignore the prototype’s properties. But what if your map needs to include the word “hasOwnProperty”? You won’t be able to call that method anymore because the object’s own property hides the method value.</p>
+
+<p>Can you think of a way to call hasOwnProperty on an object that has its own property by that name?</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Fix this call
+//console.log(map.hasOwnProperty("one"));
+
+console.log(map.__proto__.hasOwnProperty("one"))
+// → true
+</code></pre></div></div>
+
+<h3 id="continue-to-05-20-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-20-19.md">Continue to 05-20-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

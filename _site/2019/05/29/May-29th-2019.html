@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 29th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 29th 2019</h1>
+<p>
+  29 May 2019
+  
+  
+<h3 id="05-29-19">05-29-19</h3>
+<p>Went through chapter 1 of <a href="https://teropa.info/build-your-own-angular/">Build Your Own Angular</a> again to solidify the javascript examples and knowledge.</p>
+
+<p>Noticed three things that stood out for me.</p>
+
+<ol>
+  <li>
+    <p>Explicitly returning false in a LoDash forEach loop causes loDash to to exit the loop immediately.</p>
+  </li>
+  <li>
+    <p>A double negation ie. <code class="highlighter-rouge">!!value</code> will coerce it into a real boolean if the value isn’t something immediately convertible into a true/false value ie. !!undefined = false</p>
+  </li>
+  <li>
+    <p>This return syntax is a little complicated to me
+```
+   ///true or false??     OR   ???   how can you return true or false OR another true or false
+return newValue === oldValue || (typeof newValue === ‘number’ &amp;&amp; typeof oldValue === ‘number’  &amp;&amp; isNaN(newValue) &amp;&amp; isNaN(oldValue));</p>
+  </li>
+</ol>
+
+<p>```</p>
+
+<p>The issues we are dealing with in this chapter is creating a ‘watcher’ that will invoke a function if that item it is watching is changed. If the item happens to be an array or object, it is necessary (if the user specifies) to check each value in that object or array.</p>
+
+<blockquote>
+  <p>Value-based dirty-checking implies that if the old or new values are objects or arrays we have to iterate through everything contained in them. If there’s any difference in the two values, the watcher is dirty. If the value has other objects or arrays nested within, those will also be recursively compared by value.</p>
+</blockquote>
+
+<h3 id="continue-to-05-30-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-30-19.md">Continue to 05-30-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

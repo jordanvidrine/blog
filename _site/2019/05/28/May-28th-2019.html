@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 28th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 28th 2019</h1>
+<p>
+  28 May 2019
+  
+  
+<h3 id="05-28-19">05-28-19</h3>
+<p>After spending the morning organizing my ArtSpark project and putting together a project timeline with EVERYTHING I need to do, I was able to code without any distraction.</p>
+
+<p>I will be getting back to the tank/graph offshore work this Thursday. Until then I am continuing my regularly scheduled learning.</p>
+
+<p>I finished chapter 1 of this book <a href="https://teropa.info/build-your-own-angular/">Build Your Own Angular</a> as apart of the premium watch and code course I am finishing. The book is suggested reading, not to learn angular, but to learn javascript and the underlying JS in a complex framework so we can get a better grasp of all aspects of javascript.</p>
+
+<p>After finishing, I started going through it one more time to solidify some of the things happening here like Classes, passing functions to classes, creating prototypes and constructor functions, and storing data in objects created with classes.</p>
+
+<p>It is a pretty challenging read but at the same time very interesting. Through it I am also learning a lot about the Jasmine testing framework. With each new feature we implement in the book, we first write a test, then write the code to make that test pass.</p>
+
+<p>I also looked into Open Source and am interested in getting some experience with this possibly through what Mozilla has to offer.</p>
+
+<p>Here is some of the code I wrote today:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//TESTS
+'use strict';
+
+var Scope = require('../src/scope');
+
+describe('Scope', function() {
+
+  it('can be constructed and used as an object', function() {
+    var scope = new Scope();
+    scope.aProperty = 1;
+    expect(scope.aProperty).toBe(1);
+  });
+
+  describe('digest', function() {
+
+    var scope;
+
+    beforeEach(function() {
+      scope = new Scope();
+    });
+
+    it('calls the listener function of a watch on first $digest', function() {
+      var watchFn = function() { return 'wat';};
+      var listenerFn = jasmine.createSpy();
+      scope.$watch(watchFn,listenerFn);
+
+      scope.$digest();
+
+      expect(listenerFn).toHaveBeenCalled();
+    });
+
+    it('calls the watch function with the scope as the arguments', function() {
+      var watchFn = jasmine.createSpy();
+      var listenerFn = function() { };
+      scope.$watch(watchFn, listenerFn);
+
+      scope.$digest();
+      expect(watchFn).toHaveBeenCalledWith(scope)
+    });
+
+    it('calls the listener function when the watched value changes', function() {
+      scope.someValue = 'a';
+      scope.counter = 0;
+
+      scope.$watch(
+        function(scope) {return scope.someValue},
+        function(newValue, oldValue, scope) {scope.counter++;}
+      );
+
+      expect(scope.counter).toBe(0);
+
+      scope.$digest();
+      expect(scope.counter).toBe(1);
+
+      scope.$digest();
+      expect(scope.counter).toBe(1);
+
+      scope.someValue = 'b';
+      expect(scope.counter).toBe(1);
+
+      scope.$digest();
+      expect(scope.counter).toBe(2);
+
+    });
+
+    it('calls listener when watch value is first undefined', function() {
+      scope.counter = 0;
+
+      scope.$watch(
+        function(scope) { return scope.someValue;},
+        function(newValue, oldValue, scope) {scope.counter++;}
+      );
+
+      scope.$digest();
+      expect(scope.counter).toBe(1);
+    });
+
+    it('calls listener with newValue as oldValue the first time it runs', function() {
+      scope.someValue = 123;
+      var oldValueGiven;
+
+      scope.$watch(
+        function(scope) {return scope.someValue; },
+        function(newValue, oldValue, scope) {oldValueGiven = oldValue;}
+      );
+
+      scope.$digest();
+      expect(oldValueGiven).toBe(123);
+
+    });
+
+    it('may have watchers that omit the listener function', function() {
+      var watchFn = jasmine.createSpy().and.returnValue('something');
+      scope.$watch(watchFn);
+
+      scope.$digest();
+      expect(watchFn).toHaveBeenCalled();
+    });
+
+    it('triggers chained watchers in the same digest', function() {
+      scope.name = 'Jane';
+
+      scope.$watch(
+        function(scope) { return scope.nameUpper; },
+        function(newValue, oldValue, scope) {
+          if (newValue) {
+            scope.initial = newValue.substring(0,1) + '.';
+          }
+        }
+      );
+
+        scope.$watch(
+          function(scope){return scope.name;},
+          function(newValue, oldValue, scope) {
+            if(newValue) {
+              scope.nameUpper = newValue.toUpperCase();
+            }
+          }
+        );
+
+        scope.$digest();
+        expect(scope.initial).toBe('J.');
+
+        scope.name = 'Bob';
+        scope.$digest();
+        expect(scope.initial).toBe('B.');
+    });
+
+  });
+
+});
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'use strict';
+var _ = require('lodash');
+
+function Scope() {
+  this.$$watchers = [];
+}
+
+function initWatchVal() {};
+
+Scope.prototype.$watch = function(watchFn, listenerFn) {
+  var watcher = {
+    watchFn: watchFn,
+    listenerFn: listenerFn || function(){},
+    last: initWatchVal,
+  }
+  this.$$watchers.push(watcher)
+}
+
+Scope.prototype.$digest = function() {
+  var self = this;
+  _.forEach(this.$$watchers, function(watcher) {
+    var newValue = watcher.watchFn(self);
+    var oldValue = watcher.last;
+    if (newValue !== oldValue) {
+      watcher.last = newValue;
+      watcher.listenerFn(newValue,
+        (oldValue === initWatchVal ? newValue : oldValue),
+        self);
+    }
+  });
+}
+
+module.exports = Scope;
+
+</code></pre></div></div>
+
+<h3 id="continue-to-05-29-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-29-19.md">Continue to 05-29-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

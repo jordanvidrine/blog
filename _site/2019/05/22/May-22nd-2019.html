@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 22nd 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 22nd 2019</h1>
+<p>
+  22 May 2019
+  
+  
+<h3 id="05-22-19">05-22-19</h3>
+<p>Today I worked more on the watch and code exercise of creating a nested todos app. I was able to render the basics of it using only javascript and jquery to get DOM elements.</p>
+
+<h3 id="issues-i-am-having">Issues I am having</h3>
+<ol>
+  <li>Getting the nested UL + LIs to render in the correct order.
+Right now nested LIs render before their parent. Not sure how to fix this yet.
+<img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/nested-todos-example.png" alt="Nested UI/LI Error" />
+```
+function render(todos) {
+  if (todos.length == 0) {
+ $(“#todos”).html(‘’);
+ todoInput.value = ‘’;
+ return;
+  }</li>
+</ol>
+
+<p>$(“#todos”).html(todosParser(todos));
+  todoInput.value = ‘’;
+}</p>
+
+<p>function todosParser(todos) {
+  let html = ‘’;</p>
+
+<p>if (todos.length &gt;= 1) {
+    //recursively builds html to append to #todos UL
+    for (let a = 0; a &lt; todos.length; a++) {
+      let todo = todos[a];
+      //builds up the inner arrays if subTodo exists
+      if (todo.subTodos.length &gt; 0) {
+        for (let b = 0; b &lt; todo.subTodos.length; b++) {
+          let subTodo = todo.subTodos[b];
+          //if this is the beginning of a subTodo array, add &lt;ul&gt; to the front
+          if (b == 0) {
+            html += ‘&lt;ul&gt;’
+          }
+          //if this is the end of a subTodo array, add &lt;/ul&gt; to the back
+          if (b == todo.subTodos.length - 1) {
+            html += todosParser(subTodo) + ‘&lt;/ul&gt;’
+          }
+          //this this isnt the beg or end, return an &lt;li&gt; from todoparser
+          else {
+            html += todosParser(subTodo)
+          }
+        }
+      }
+      html += todosParser(todo);
+    }
+    return html;
+  }</p>
+
+<p>else {
+    let completed = todos.completed ? “class=’todo completed’” : “class=’todo’”
+    let completeTodoButton = <code class="highlighter-rouge">&lt;button id="complete-todo"&gt;</code>;
+    if (todos.completed) {
+      completeTodoButton += <code class="highlighter-rouge">(*)&lt;/button&gt;</code>
+      //only inserts button IF subTodos are all complete or non-existant
+    } else if (todos.subTodos.filter(e=&gt;e.completed).length === todos.subTodos.length) {
+      completeTodoButton += <code class="highlighter-rouge">()&lt;/button&gt;</code>
+    } else {
+      completeTodoButton = ‘’;
+    }
+    return (
+    <code class="highlighter-rouge">&lt;li id="${todos.id}" ${completed}&gt;</code> +
+      <code class="highlighter-rouge">${completeTodoButton} ${todos.title}</code> +
+      <code class="highlighter-rouge">&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;</code> +
+      <code class="highlighter-rouge">&lt;button id="add-sub-todos-btn"&gt;add sub-todos&lt;/button&gt;</code> +
+    <code class="highlighter-rouge">&lt;/li&gt;</code>
+    )
+  }
+}</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2. Error when trying to add a nested todo to an already nested todo
+My addSubTodo and findTodo functions are the ones at play in this case
+</code></pre></div></div>
+<p>function findTodo(e) {
+  let targetId = e.target.parentElement.id;
+  let todoToAddSubTo = todos.filter(e =&gt; e.id == targetId)[0];
+  let todoIndex = todos.indexOf(todoToAddSubTo);
+  return todos[todoIndex]
+}</p>
+
+<p>function findTodo(e){</p>
+
+<p>}</p>
+
+<p>function addSubTodo(e){
+  let todo = findTodo(e);
+  todo.subTodos.push({
+    id: uid(),
+    title: todoInput.value,
+    completed: false,
+    subTodos: [],
+  })
+  store(‘stored-todos’, todos);
+  render(todos);
+  $(“#todo-input”).focus()
+}
+```</p>
+
+<h3 id="build-your-own-framework">Build Your Own Framework</h3>
+<p>Purchased a recommended book from Gordon of watch and code. The book details a step by step process of how to create your own version of a popular javascript library. It is to be used to better understand JS as a whole and on a deeper aspect, not to learn the library.</p>
+
+<p>Began working through the first chapter and its exercises. I really enjoy the depth and the authors communication.</p>
+
+<h3 id="continue-to-05-23-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-23-19.md">Continue to 05-23-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

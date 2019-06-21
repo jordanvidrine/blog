@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 3rd 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>June 3rd 2019</h1>
+<p>
+  03 Jun 2019
+  
+  
+<h3 id="06-03-19">06-03-19</h3>
+
+<h4 id="first-half">First Half</h4>
+<p>Spent the first half of the day going through 3/4 of chapter two of ‘Build your own AngularJS.’ Getting used to looking at fairly complex code and running a lot of functions in the jasmine debugger to see what exactly is going on behind the scenes.</p>
+
+<p>Again, this isn’t to learn angular or any library in particular, but to get comfortable reading, writing, and understanding complex code.</p>
+
+<h4 id="second-half">Second half</h4>
+<p>I FINALLY finished and figured out my nested todos app exercise from the Watch and Code premium course. It wasnt that it was extremely complex, just figuring out which direction to take to get the job done was tough. I eventually went with a recursive reduce function to “render” the html of the todo list with its nested todos to the page.</p>
+
+<p>I am super proud of myself for being able to figure this one out!</p>
+
+<p>Heres how it looks:
+<img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/nested-todos-example_2.png" alt="nested todos app" /></p>
+
+<p>And here is some of the code:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function render(todos) {
+  if (todos.length == 0) {
+    $("#todos").html('');
+    todoInput.value = '';
+    return;
+  }
+  $("#todos").html(todoParser(todos));
+  todoInput.value = '';
+}
+
+function todoParser(arr) {
+    return arr.reduce(function(accumulator,currentValue,idx) {
+            //add the current element to the accumulator html as the first LI tag
+            //accumulator += `&lt;li&gt;${currentValue.title}&lt;/li&gt;`;
+            accumulator += todoCreator(currentValue);
+            //check if the current element has subTodos
+            if (currentValue.subTodos.length) {
+              //if it does, recurse through the subTodo array
+              accumulator += todoParser(currentValue.subTodos);
+              //once thats done, check if this is the last element of its array
+              //if it is, add a closing UL tag to end the section
+			        if (idx == arr.length - 1) {
+              	accumulator += `&lt;/ul&gt;`;
+              	return accumulator;
+              } else {
+	                return accumulator;
+			          }
+            } //if current element does NOT have subTodos, just check if its the last element
+              //and add a closing UL tag, if not, return the accumulator
+              else {
+  			        if (idx == arr.length - 1) {
+                	accumulator += `&lt;/ul&gt;`;
+                	return accumulator;
+                } else {
+                	return accumulator;
+				          }
+              }
+        }, '&lt;ul&gt;')
+
+}
+
+function todoCreator(todo) {
+  let completed = todo.completed ? "class='todo completed'" : "class='todo'"
+  let completeTodoButton = `&lt;button id="complete-todo"&gt;`;
+  if (todo.completed) {
+    completeTodoButton += `(*)&lt;/button&gt;`
+    //only inserts button IF subTodos are all complete or non-existant
+  } else if (todo.subTodos.filter(e=&gt;e.completed).length === todo.subTodos.length) {
+    completeTodoButton += `()&lt;/button&gt;`
+  } else {
+    completeTodoButton = '';
+  }
+  return (
+  `&lt;li id="${todo.id}" ${completed}&gt;` +
+    `${completeTodoButton} ${todo.title} ` +
+    `&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;` +
+    `&lt;button id="add-sub-todos-btn"&gt;add sub-todo&lt;/button&gt;` +
+  `&lt;/li&gt;`
+  )
+}
+</code></pre></div></div>
+
+<h3 id="continue-to-06-04-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/06-04-19.md">Continue to 06-04-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

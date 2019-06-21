@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 11th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 11th 2019</h1>
+<p>
+  11 May 2019
+  
+  
+<h1 id="5-11-19">5-11-19</h1>
+<p>Started the day off right at the Rayne Frog Festival. lol</p>
+
+<p>Worked for a couple of hours on the Customer Quote App for my generator manager. I wrote some code to validate if the form was filled out as well as used an npm package (‘email-validator’) to validate the email address entered.</p>
+
+<p>Also worked on correctly displaying an error when the user has not completely filled out the form yet. (I will transition to a UI version of this, but for now I will stick with simple error messages.)</p>
+
+<h4 id="here-is-the-basic-unstyled-page-so-far">Here is the basic unstyled page so far.</h4>
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/power-gen-form.png" alt="Customer Quote App" /></p>
+
+<p>I am a little proud of writing these two functions:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>formValidator(){
+
+  let needsToBeCorrected = [];
+
+  //creates an array populated with each form field that is not properly filled out
+  for (let info in this.state.customerInfo) {
+    //email validator
+    if (info === 'email') {
+      if (!validator.validate(this.state.customerInfo[info])) {
+        needsToBeCorrected.push(info);
+      }
+    //skip the 'isValid' info in the state
+    } else if (info === 'isValid') {
+    } else {
+      if (this.state.customerInfo[info] === '')
+        needsToBeCorrected.push(info)
+      }
+    }
+
+  //tests to see if the array with form fields needing correction is 0
+  //which would mean the form is correctly filled out
+  if (needsToBeCorrected.length === 0) {
+    this.setState({
+      ...this.state,
+      customerInfo: {
+        ...this.state.customerInfo,
+        needsToBeCorrected,
+        isValid: true,
+      }})
+    //if it needs correcting, save the state
+    } else if (needsToBeCorrected.length !== 0) {
+      this.setState({
+        ...this.state,
+        customerInfo: {
+          ...this.state.customerInfo,
+          needsToBeCorrected,
+          isValid: false,
+        }})
+    }
+}
+</code></pre></div></div>
+
+<p>The above function is run once ‘next’ is clicked. The following is rendered underneath the component if isValid remains false.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var warningError;
+if (this.state.customerInfo.isValid === false) {
+  warningError = this.state.customerInfo.needsToBeCorrected.reduce((acc,cur,idx,array) =&gt; {
+  if (idx &lt; array.length-1) {
+      acc = acc + '' + ' ' + cur + ',';return acc
+  } else {
+    return acc + ' ' + cur + '.' + ' Once corrected, try submitting again.';
+  }},'The following items need to be corrected:');
+} else {
+  warningError = '';
+}
+</code></pre></div></div>
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/error-msg.png" alt="error-msg" /></p>
+
+<h3 id="continue-to-05-14-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-14-19.md">Continue to 05-14-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

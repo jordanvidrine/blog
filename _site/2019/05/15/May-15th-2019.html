@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 15th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 15th 2019</h1>
+<p>
+  15 May 2019
+  
+  
+<h1 id="05-15-19">05-15-19</h1>
+<p>Going through Chapter 6 in Eloquent Javascript today. This is my second read through of the chapter and things are getting clearer and beginning to stick.</p>
+
+<p>Some things I’ve begun to solidify today are:</p>
+<ol>
+  <li>Classes</li>
+  <li>Prototypes</li>
+  <li>Overridding derived Prototypes</li>
+  <li>Polymorphism</li>
+</ol>
+
+<p>Some things I need to better solidify are</p>
+<ol>
+  <li>Symbols (Didnt even know they existed before this chapter)</li>
+  <li>Inheritance</li>
+</ol>
+
+<p>I ran the following code a couple of times through the chrome debugger and was able to understand it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Matrix {
+  constructor(width, height, element = (x, y) =&gt; undefined) {
+    this.width = width;
+    this.height = height;
+    this.content = [];
+
+    for (let y = 0; y &lt; height; y++) {
+      for (let x = 0; x &lt; width; x++) {
+        this.content[y * width + x] = element(x, y);
+      }
+    }
+  }
+
+  get(x, y) {
+    return this.content[y * this.width + x];
+  }
+  set(x, y, value) {
+    this.content[y * this.width + x] = value;
+  }
+}
+class MatrixIterator {
+  constructor(matrix) {
+    this.x = 0;
+    this.y = 0;
+    this.matrix = matrix;
+  }
+
+  next() {
+    if (this.y == this.matrix.height) return {done: true};
+
+    let value = {x: this.x,
+                 y: this.y,
+                 value: this.matrix.get(this.x, this.y)};
+    this.x++;
+    if (this.x == this.matrix.width) {
+      this.x = 0;
+      this.y++;
+    }
+    return {value, done: false};
+  }
+}
+
+Matrix.prototype[Symbol.iterator] = function() {
+  return new MatrixIterator(this);
+};
+
+let matrix = new Matrix(2, 2, (x, y) =&gt; `value ${x},${y}`);
+for (let {x, y, value} of matrix) {
+  console.log(x, y, value);
+}
+// → 0 0 value 0,0
+// → 1 0 value 1,0
+// → 0 1 value 0,1
+// → 1 1 value 1,1
+
+</code></pre></div></div>
+
+<p>I’ve learned through Gordon Zhu’s Watch and Code lessons that reading other people’s code, and reading more complex code than you can easily grasp is an excellent way to get better at programming.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<h3 id="a-vector-type">A vector type</h3>
+
+<p>Write a class Vec that represents a vector in two-dimensional space. It takes x and y parameters (numbers), which it should save to properties of the same name. Give the Vec prototype two methods, plus and minus, that take another vector as a parameter and return a new vector that has the sum or difference of the two vectors’ (this and the parameter) x and y values. Add a getter property length to the prototype that computes the length of the vector—that is, the distance of the point (x, y) from the origin (0, 0).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Vec {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    plus(vector) {
+        return new Vec(this.x + vector.x, this.y + vector.y)
+    }
+    minus(vector){
+        return new Vec(this.x - vector.x, this.y - vector.y)
+    }
+
+    get length(){
+        return Math.sqrt(((this.x)*(this.x))+((this.y)*(this.y)))
+    }
+}
+
+console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+// → Vec{x: 3, y: 5}
+console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+// → Vec{x: -1, y: -1}
+console.log(new Vec(3, 4).length);
+// → 5
+</code></pre></div></div>
+
+<h3 id="groups">Groups</h3>
+
+<p>The standard JavaScript environment provides another data structure called Set. Like an instance of Map, a set holds a collection of values. Unlike Map, it does not associate other values with those—it just tracks which values are part of the set. A value can be part of a set only once—adding it again doesn’t have any effect.</p>
+
+<p>Write a class called Group (since Set is already taken). Like Set, it has add, delete, and has methods. Its constructor creates an empty group, add adds a value to the group (but only if it isn’t already a member), delete removes its argument from the group (if it was a member), and has returns a Boolean value indicating whether its argument is a member of the group.</p>
+
+<p>Use the === operator, or something equivalent such as indexOf, to determine whether two values are the same.</p>
+
+<p>Give the class a static from method that takes an iterable object as argument and creates a group that contains all the values produced by iterating over it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Group {
+    constructor() {
+        this.group = [];
+    }
+    add(value) {
+        if (!this.has(value)) {
+        this.group.push(value);
+        }
+    }
+    delete(value) {
+        if (this.has(value)) {
+            this.group = this.group.filter(v =&gt; v !== value)
+        }
+    }
+    has(value) {
+        if (this.group.indexOf(value) !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    static from(object){
+        let group = new Group;
+        for (let values of object){
+            group.add(values);
+        }
+        return group;
+    }
+}
+
+let group = Group.from([10, 20]);
+console.log(group.has(10));
+// → true
+console.log(group.has(30));
+// → false
+group.add(10);
+group.delete(10);
+console.log(group.has(10));
+// → false
+</code></pre></div></div>
+
+<h3 id="continue-to-05-17-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/05-17-19.md">Continue to 05-17-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

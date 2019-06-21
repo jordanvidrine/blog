@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>May 30th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>May 30th 2019</h1>
+<p>
+  30 May 2019
+  
+  
+<h3 id="05-30-19">05-30-19</h3>
+<p>Spent a couple hours working back on the nested todos exercise for the Watch and Code premium users. I was excited to FIX the issue where my nested todos were rendering BEFORE their parent element.
+A couple issues still exist however:</p>
+
+<ol>
+  <li>
+    <p>I cannot nest a subTodo on an already nested todo:</p>
+
+    <p>I think the issue here is that I have a ‘findTodo’ function that runs when the addSubTodo button is clicked. I am having an issue translating the ID of the todo that is clicked, to the push method targeting the correct subTodo.</p>
+  </li>
+  <li>
+    <p>I cannot toggle a nested todo</p>
+
+    <p>I believe the issue here is similar to the above.</p>
+  </li>
+</ol>
+
+<p>Here is the code I used to fix the ordering problem:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function render(todos) {
+  if (todos.length == 0) {
+    $("#todos").html('');
+    todoInput.value = '';
+    return;
+  }
+  $("#todos").html(todosParser(todos));
+  todoInput.value = '';
+}
+
+function todosParser(todos) {
+  let html = '';
+  if (todos.length &gt;= 1) {
+    //recursively builds html to append to #todos UL
+    for (let a = 0; a &lt; todos.length; a++) {
+      let todo = todos[a];
+      if (!todo.subTodos.length &gt; 0) html += todosParser(todo);
+      //builds up the inner arrays if subTodo exists
+      if (todo.subTodos.length &gt; 0) {
+        html += todoCreator(todo);
+        for (let b = 0; b &lt; todo.subTodos.length; b++) {
+          let subTodo = todo.subTodos[b];
+          //if this is the beginning of a subTodo array, add &lt;ul&gt; to the front
+          if (b == 0) {
+            html += '&lt;ul&gt;'
+          }
+          //if this is the end of a subTodo array, add &lt;/ul&gt; to the back
+          if (b == todo.subTodos.length - 1) {
+            html += todosParser(subTodo) + '&lt;/ul&gt;'
+          }
+          //this this isnt the beg or end, return an &lt;li&gt; from todoparser
+          else {
+            html += todosParser(subTodo)
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    html += todoCreator(todos)
+  }
+  return html;
+}
+
+function todoCreator(todo) {
+  let completed = todo.completed ? "class='todo completed'" : "class='todo'"
+  let completeTodoButton = `&lt;button id="complete-todo"&gt;`;
+  if (todo.completed) {
+    completeTodoButton += `(*)&lt;/button&gt;`
+    //only inserts button IF subTodos are all complete or non-existant
+  } else if (todo.subTodos.filter(e=&gt;e.completed).length === todo.subTodos.length) {
+    completeTodoButton += `()&lt;/button&gt;`
+  } else {
+    completeTodoButton = '';
+  }
+  return (
+  `&lt;li id="${todo.id}" ${completed}&gt;` +
+    `${completeTodoButton} ${todo.title}` +
+    `&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;` +
+    `&lt;button id="add-sub-todos-btn"&gt;add sub-todos&lt;/button&gt;` +
+  `&lt;/li&gt;`
+  )
+}
+</code></pre></div></div>
+
+<h3 id="continue-to-06-03-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/06-03-19.md">Continue to 06-03-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

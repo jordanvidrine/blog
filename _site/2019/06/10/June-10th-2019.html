@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 10th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>June 10th 2019</h1>
+<p>
+  10 Jun 2019
+  
+  
+<h3 id="06-10-19">06-10-19</h3>
+
+<p>Man, is this year flying by! I’ve got to put some time into my artspark project so this week will be a slow one for me coding-wise. This morning I wrote a little script to help my wife pick a winner for a drawing she did with her business. We had 266 email submissions as well as another 50+ Facebook &amp; Instagram submissions.</p>
+
+<p>I used a <a href="https://csvjson.com/csv2json">CSV to JSON converter</a> to parse through the email list and convert that into an array of names. We then added to that array by using a simple html input I made. We entered the user name, and the amount of submission, and the submit button would push that (x) amount of times into the array of submits.</p>
+
+<p>I then picked a random user from the array with the simple<code class="highlighter-rouge">Math.floor(Math.random()*array.length)</code></p>
+
+<p>I also updated the styling of my calculator app, and reformatted my LinkedIn profile and resume to reflect my current career path.</p>
+
+<h4 id="calculator-update">Calculator update</h4>
+<p>Got to work on this for awhile tonight and encountered multiple bugs. Pressing “=” when current input or formula evaluated to 0 resulted in NaN. I fixed that. I am also implementing the ability to more intelligently use the decimal place. In the past I treated it as an operator and would not allow it after a regular operator symbol.</p>
+
+<p>Now pressing “.” after an operator will cause the formula to be built like such “4 + 0.” or “4 x 0.” and it will wait for the next number input to decide what the fractioned number should be.</p>
+
+<p>Other Issues I need to work on:</p>
+<ol>
+  <li>Need to STOP the entering of multiple decimals in a number</li>
+  <li>Need to add “0.” to formula and current input when “.” is pressed for the first time after “=” or operator</li>
+  <li>Need to stop number from getting too large for its Screen</li>
+  <li>An operator should not be able to be entered right after a “.” press</li>
+</ol>
+
+<h3 id="continue-to-06-11-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/06-11-19.md">Continue to 06-11-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

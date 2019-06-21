@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 12th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>June 12th 2019</h1>
+<p>
+  12 Jun 2019
+  
+  
+<h3 id="06-12-19">06-12-19</h3>
+<p>Super productive day for me today. I went back to my Pomodoro App and finalized the look of it, as well as updated some of the code. Since I now know how to create React Apps without the bulk of installing a ton of node packages, I was able to re-format my code to upload onto my new github portfolio.</p>
+
+<h4 id="portfolio">Portfolio</h4>
+<p>My portfolio is now up with 3 apps!
+<img src="https://i.postimg.cc/KzYcqJYK/Screenshot-2019-06-12-Jordan-Vidrine-Web-Dev.png" alt="Jordan Vidrine's Portfolio" /></p>
+
+<h4 id="drum-app">Drum App</h4>
+<p>I began working today on a Drum Machine app as well. I implemented the ability to ‘press’ the drum pads with QWER and ASDF on the keyboard. I also figured out how to increase or decrease volume based on the mouseup, mousedown, and mousemove events.
+<img src="https://i.postimg.cc/520VM6VG/Screenshot-2019-06-12-Drum-Machine-App.png" alt="Drum App" /></p>
+
+<p>Here is the code I used to increase and decrease volume, with a min of 0 and max of 100,</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>componentDidMount() {
+  document.addEventListener('keydown', this.handleKeyPress);
+  document.addEventListener('keyup', this.handleKeyUp);
+  document.addEventListener('mouseup', this.handleMouseUp)
+}
+
+handleMouseDown(e){
+  document.addEventListener('mousemove', this.handleMouseMove);
+   this.setState({
+     ...this.state,
+     //this sets the original click position, used by mousemove as a base to increase or decrease volume by
+     mouseDown: e.clientX,
+   })
+}
+
+handleMouseUp(e){
+  document.removeEventListener('mousemove', this.handleMouseMove)
+}
+
+handleMouseMove(e){
+  let volume = this.state.volume;
+  volume = volume + ((e.clientX - this.state.mouseDown) / 50);
+  let updatedVolume;
+
+  if (volume &gt;= 0 &amp;&amp; volume &lt;= 100) {
+    updatedVolume = volume;
+  } else if (volume &lt;= 0) {
+    updatedVolume = 0;
+  } else {
+    updatedVolume = 100;
+  }
+  this.setState({
+    ...this.state,
+    volume: updatedVolume,
+  })
+}
+</code></pre></div></div>
+
+<p>After this project, I will move forward with learning Node and a back end database like mySQL or mongoDB.</p>
+
+<h3 id="continue-to-06-17-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/06-17-19.md">Continue to 06-17-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 18th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>June 18th 2019</h1>
+<p>
+  18 Jun 2019
+  
+  
+<h3 id="06-18-19">06-18-19</h3>
+
+<p>I finished the Drum Machine React App and uploaded it <a href="https://jordanvidrine.github.io/drumMachine/index.html">here</a>. I am pretty proud of the way it came out as well. It was cool to finish this without really encountering any issues. I learned more about mouse and click events creating the app, but other than that, it was really easy.</p>
+
+<h4 id="other-activities">Other Activities</h4>
+<p>Continued learning Node.js with a udemy course. Went through using routes and began learning the basics of the Express NPM module. Used that and handlebars ‘hbs’ in Node to go through a nice templating tutorial with custom routes.</p>
+
+<p>Here is the JS for that</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+const path = require('path') //lets you specify path directorys
+const express = require('express');
+const hbs = require('hbs'); //for partials
+
+const app = express();
+
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
+
+//to use a different name than views for your templates engine
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+
+//create and render a 404 page with hanldebars
+//setup the template to render header and footer
+//set up to render error message in paragraph
+//page not found
+//help article not found
+
+//specifies what directory to use for "/" get path
+app.use(express.static(publicDirectoryPath))
+
+app.get('', (req,res) =&gt; {
+  //renders the view with the name you put in
+  //as well as on object of values for the view to access
+  res.render('index', {
+    title: 'Weather',
+    name: 'Jordan Vidrine'
+  })
+})
+
+app.get('/about', (req,res) =&gt; {
+  res.render('about', {
+    title: 'About Page',
+    name: 'Jordan Vidrine'
+  })
+})
+
+app.get('/help', (req,res) =&gt; {
+  res.render('help', {
+    title: 'Help Page',
+    helpText: 'Do you need any help?',
+    name: 'Jordan Vidrine'
+  })
+})
+
+app.get('/weather', (req,res) =&gt; {
+  res.send({
+    forecast: 'Not so great',
+    location: 'Eunice, LA',
+    name: 'Jordan Vidrine',
+    title: 'Weather'
+  })
+})
+
+app.get('/help/*', (req,res) =&gt; {
+  res.render('404', {
+    title: '404 Error! Page',
+    name: 'Jordan Vidrine',
+    errorMessage: 'Oops! This help article doesnt exist!'
+  })
+})
+
+//matches anything that hasnt been matched so far 404 Error
+app.get('*', (req,res) =&gt; {
+  res.render('404', {
+    title: '404 Error! Page',
+    name: 'Jordan Vidrine',
+    errorMessage: 'Oops! This page doesnt exist!'
+  })
+})
+
+app.listen(3000, () =&gt; {
+  console.log('Server is up on port 3000')
+} )
+
+</code></pre></div></div>
+
+<h3 id="continue-to-06-19-19-"><a href="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/06-19-19.md">Continue to 06-19-19 –&gt;</a></h3>
+
+
+  </body>
+</html>

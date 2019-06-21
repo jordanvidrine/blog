@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 19th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+    
+    <a href="/about.html" >
+      About
+    </a>
+    
+    <a href="/blog.html" >
+      Blog
+    </a>
+    
+    <a href="/bio.html" >
+      Bio
+    </a>
+    
+</nav>
+
+    <h1>June 19th 2019</h1>
+<p>
+  19 Jun 2019
+  
+  
+<h3 id="06-19-19">06-19-19</h3>
+
+<p>Spent the first part of the day working through Eloquent Javascript chapters 8-9 on error handling and the dreaded regex. Not a huge fan of working with regex as it is pretty confusing but I do understand it and its purposes.</p>
+
+<h4 id="continued-working-on-nodejs-course">Continued working on Node.js Course</h4>
+<p>In the course today I went through more of using express inside of node. It is starting to get a little complex, which I like because it causes me to stretch my thinking and helps me to not get bored.</p>
+
+<p>The task was to create a basic app front end and backend. In the backend we created a .get(‘/weather’) route where we send a search query and we are returned the weather info in JSON for what we entered in. Here’s what that looked like.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app.get('/weather', (req,res) =&gt; {
+  if (!req.query.address) {
+    return res.send({
+      error: "You must provide an address!"
+    })
+  }
+  //run geocode function, passing in the address from the browser
+  geocode(req.query.address, (error,data = {}) =&gt; {
+    if (error) {
+      //return error message if no address was entered
+      return res.send({error})
+    }
+    //if geocode worked correctly, then use the data from it to
+    //invoke the forecast function
+    forecast(data.latitude, data.longitude, (forecastError, forecastData = {}) =&gt; {
+      if (forecastError) {
+        return res.send({error})
+      }
+      res.send({
+        city: data.location,
+        forecast:forecastData,
+        'Search Provided': req.query.address,
+      })
+    })
+  });
+})
+</code></pre></div></div>
+
+<p>For the front-end we use fetch to make a call to that get route we established with express on the backend. Here is how that looks.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function getWeather(address) {
+  fetch('http://localhost:3000/weather?address='+address).then((response)=&gt;{
+    let infoHtml = document.getElementById('weatherInfo')
+    response.json().then((data) =&gt; {
+      if (data.error) {
+        infoHtml.innerHTML = data.error;
+        return;
+      } else {
+        infoHtml.innerHTML = `The weather in ${data['Search Provided']} is: ${data.forecast}`
+      }
+    })
+  });
+}
+
+const weatherForm = document.querySelector('form')
+const search = document.querySelector('input')
+
+weatherForm.addEventListener('submit', (e) =&gt; {
+  e.preventDefault();
+
+  let location = search.value;
+  let data = getWeather(location);
+  search.value = '';
+})
+</code></pre></div></div>
+
+<p>I also played around a bit further and discovered a pretty great API <a href="https://www.worldtradingdata.com/">World Trading Data</a>.</p>
+
+<p>Here’s something I am playing around with with that.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const app = express();
+
+//path names
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
+
+//specifies what directory to use for "/" get path
+app.use(express.static(publicDirectoryPath))
+
+app.set('view engine', 'hbs');
+app.set('views', viewsPath);
+hbs.registerPartials(partialsPath)
+
+app.get('/',(req,res) =&gt; {
+  res.render('index', {
+    title: 'Stocks Info App'
+  })
+})
+
+function getStock(symbol, callback) {
+  request({url: STOCK_URL + symbol + STOCK_KEY, json: true}, (err,res) =&gt; {
+    if (err) {
+      callback('ERROR', undefined)
+    } else {
+      let data = res.body;
+      callback(undefined, data)
+    }
+  })
+}
+
+app.get('/stock', (req,res) =&gt; {
+  if (!req.query.stock) return res.send({error:'You must provide a stock symbol!'})
+
+  getStock(req.query.stock, (error, data) =&gt; {
+    if (error) return res.send('error');
+    res.send({
+      data: data.data[0],
+    })
+  })
+})
+</code></pre></div></div>
+
+
+  </body>
+</html>

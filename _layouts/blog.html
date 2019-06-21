@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{"/assets/css/blog-styles.css" | relative_url}}">
+  </head>
+  <body>
+    <div id='title-nav'>
+      <h1>Latest Entries</h1>
+      {% include navigation.html %}
+    </div>
+    {{ content }}
+  </body>
+</html>

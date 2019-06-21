@@ -1,3 +1,6 @@
+---
+excerpt_separator: <!--more-->
+---
 collections:
   authors:
     output: true

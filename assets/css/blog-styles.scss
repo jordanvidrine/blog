@@ -1,0 +1,81 @@
+---
+---
+//VARIABLE DECLARATIONS
+//bg color
+$bg: #fffaf6;
+$textColor: #0f1a40;
+$redOrange: #e95a33;
+$lightBlue: #55c8e6;
+$pink: #f4b6b3;
+$yellow: #fce752;
+
+body {
+  background-color: $bg;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: arial;
+}
+
+h1 {
+  margin: 0 0 15px 0;
+  color: $textColor;
+}
+
+a {
+  text-decoration: none;
+  color: $redOrange;
+  margin: 0 5px 0 0;
+  font-weight: bold;
+}
+
+.current {
+  color: $lightBlue
+}
+
+#title-nav {
+  min-width: 225px;
+}
+
+#posts {
+  width: 70%;
+  h2{
+    margin: 0;
+  }
+  ul {
+    margin: 0;
+    list-style: none;
+    animation: ul-appear 1s ease-in forwards;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      margin: 0 0 25px 0;
+      border-left: 2px solid rgba(0,0,0,0.2);
+      padding-left: 25px;
+
+      p {
+        font-size: 20px;
+        width: 75%;
+        color: $textColor;
+      }
+      a {
+        text-decoration: none;
+        color: $redOrange;
+      }
+    }
+  }
+}
+
+@keyframes ul-appear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,6 +1,9 @@
 collections:
   authors:
     output: true
+  posts:
+    output: true
+    permalink: ./:year/:month/:date/:title
 
 defaults:
   - scope:

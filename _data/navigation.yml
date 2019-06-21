@@ -1,8 +1,8 @@
 - name: Home
-  link: jekyll-test/
+  link: ./
 - name: About
-  link: jekyll-test/about.html
+  link: ./about.html
 - name: Blog
-  link: jekyll-test/blog.html
+  link: ./blog.html
 - name: Bio
-  link: jekyll-test/bio.html
+  link: ./bio.html

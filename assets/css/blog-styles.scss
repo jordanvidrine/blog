@@ -2,10 +2,10 @@
 ---
 //VARIABLE DECLARATIONS
 //bg color
-$bg: #fffaf6;
-$textColor: #0f1a40;
+$bg: #f9fafc;
+$textColor: #303235;
 $redOrange: #e95a33;
-$lightBlue: #55c8e6;
+$lightBlue: #3b9bd3;
 $pink: #f4b6b3;
 $yellow: #fce752;
 
@@ -25,13 +25,13 @@ h1 {
 
 a {
   text-decoration: none;
-  color: $redOrange;
+  color: $textColor;
   margin: 0 5px 0 0;
   font-weight: bold;
 }
 
 .current {
-  color: $lightBlue
+  color: rgba(59,155,211,0.7);
 }
 
 #title-nav {
@@ -62,7 +62,7 @@ a {
       }
       a {
         text-decoration: none;
-        color: $redOrange;
+        color: $textColor;
       }
     }
   }

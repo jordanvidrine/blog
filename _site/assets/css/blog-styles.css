@@ -11,7 +11,7 @@ a { text-decoration: none; color: #e95a33; margin: 0 5px 0 0; font-weight: bold;
 #posts { width: 70%; }
 #posts h2 { margin: 0; }
 #posts ul { margin: 0; list-style: none; animation: ul-appear 1s ease-in forwards; display: flex; flex-direction: column; }
-#posts ul li { margin: 0 0 25px 0; border-left: 2px solid rgba(0, 0, 0, 0.2); padding-left: 25px; }
+#posts ul li { margin: 0 0 50px 0; border-left: 2px solid rgba(0, 0, 0, 0.2); padding-left: 25px; }
 #posts ul li p { font-size: 20px; width: 75%; color: #0f1a40; }
 #posts ul li a { text-decoration: none; color: #e95a33; }
 

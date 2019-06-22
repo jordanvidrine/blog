@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -27,84 +34,83 @@
 
 <p>Here is the JS for that</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-const path = require('path') //lets you specify path directorys
-const express = require('express');
-const hbs = require('hbs'); //for partials
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">)</span> <span class="c1">//lets you specify path directorys</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">hbs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'hbs'</span><span class="p">);</span> <span class="c1">//for partials</span>
 
-const app = express();
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
 
-const publicDirectoryPath = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname, '../templates/views')
-const partialsPath = path.join(__dirname, '../templates/partials')
+<span class="kd">const</span> <span class="nx">publicDirectoryPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../public'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">viewsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/views'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">partialsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/partials'</span><span class="p">)</span>
 
-//to use a different name than views for your templates engine
-app.set('view engine', 'hbs')
-app.set('views', viewsPath)
-hbs.registerPartials(partialsPath)
+<span class="c1">//to use a different name than views for your templates engine</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'view engine'</span><span class="p">,</span> <span class="s1">'hbs'</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'views'</span><span class="p">,</span> <span class="nx">viewsPath</span><span class="p">)</span>
+<span class="nx">hbs</span><span class="p">.</span><span class="nx">registerPartials</span><span class="p">(</span><span class="nx">partialsPath</span><span class="p">)</span>
 
-//create and render a 404 page with hanldebars
-//setup the template to render header and footer
-//set up to render error message in paragraph
-//page not found
-//help article not found
+<span class="c1">//create and render a 404 page with hanldebars</span>
+<span class="c1">//setup the template to render header and footer</span>
+<span class="c1">//set up to render error message in paragraph</span>
+<span class="c1">//page not found</span>
+<span class="c1">//help article not found</span>
 
-//specifies what directory to use for "/" get path
-app.use(express.static(publicDirectoryPath))
+<span class="c1">//specifies what directory to use for "/" get path</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">publicDirectoryPath</span><span class="p">))</span>
 
-app.get('', (req,res) =&gt; {
-  //renders the view with the name you put in
-  //as well as on object of values for the view to access
-  res.render('index', {
-    title: 'Weather',
-    name: 'Jordan Vidrine'
-  })
-})
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">//renders the view with the name you put in</span>
+  <span class="c1">//as well as on object of values for the view to access</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Weather'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
 
-app.get('/about', (req,res) =&gt; {
-  res.render('about', {
-    title: 'About Page',
-    name: 'Jordan Vidrine'
-  })
-})
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/about'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'about'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'About Page'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
 
-app.get('/help', (req,res) =&gt; {
-  res.render('help', {
-    title: 'Help Page',
-    helpText: 'Do you need any help?',
-    name: 'Jordan Vidrine'
-  })
-})
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/help'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'help'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Help Page'</span><span class="p">,</span>
+    <span class="na">helpText</span><span class="p">:</span> <span class="s1">'Do you need any help?'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
 
-app.get('/weather', (req,res) =&gt; {
-  res.send({
-    forecast: 'Not so great',
-    location: 'Eunice, LA',
-    name: 'Jordan Vidrine',
-    title: 'Weather'
-  })
-})
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/weather'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+    <span class="na">forecast</span><span class="p">:</span> <span class="s1">'Not so great'</span><span class="p">,</span>
+    <span class="na">location</span><span class="p">:</span> <span class="s1">'Eunice, LA'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span><span class="p">,</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Weather'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
 
-app.get('/help/*', (req,res) =&gt; {
-  res.render('404', {
-    title: '404 Error! Page',
-    name: 'Jordan Vidrine',
-    errorMessage: 'Oops! This help article doesnt exist!'
-  })
-})
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/help/*'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'404'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'404 Error! Page'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span><span class="p">,</span>
+    <span class="na">errorMessage</span><span class="p">:</span> <span class="s1">'Oops! This help article doesnt exist!'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
 
-//matches anything that hasnt been matched so far 404 Error
-app.get('*', (req,res) =&gt; {
-  res.render('404', {
-    title: '404 Error! Page',
-    name: 'Jordan Vidrine',
-    errorMessage: 'Oops! This page doesnt exist!'
-  })
-})
+<span class="c1">//matches anything that hasnt been matched so far 404 Error</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'404'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'404 Error! Page'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span><span class="p">,</span>
+    <span class="na">errorMessage</span><span class="p">:</span> <span class="s1">'Oops! This page doesnt exist!'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
 
-app.listen(3000, () =&gt; {
-  console.log('Server is up on port 3000')
-} )
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Server is up on port 3000'</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">)</span>
 
 </code></pre></div></div>
 

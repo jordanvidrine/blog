@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -38,70 +45,71 @@
 </ol>
 
 <p>Here is the code I used to fix the ordering problem:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function render(todos) {
-  if (todos.length == 0) {
-    $("#todos").html('');
-    todoInput.value = '';
-    return;
-  }
-  $("#todos").html(todosParser(todos));
-  todoInput.value = '';
-}
 
-function todosParser(todos) {
-  let html = '';
-  if (todos.length &gt;= 1) {
-    //recursively builds html to append to #todos UL
-    for (let a = 0; a &lt; todos.length; a++) {
-      let todo = todos[a];
-      if (!todo.subTodos.length &gt; 0) html += todosParser(todo);
-      //builds up the inner arrays if subTodo exists
-      if (todo.subTodos.length &gt; 0) {
-        html += todoCreator(todo);
-        for (let b = 0; b &lt; todo.subTodos.length; b++) {
-          let subTodo = todo.subTodos[b];
-          //if this is the beginning of a subTodo array, add &lt;ul&gt; to the front
-          if (b == 0) {
-            html += '&lt;ul&gt;'
-          }
-          //if this is the end of a subTodo array, add &lt;/ul&gt; to the back
-          if (b == todo.subTodos.length - 1) {
-            html += todosParser(subTodo) + '&lt;/ul&gt;'
-          }
-          //this this isnt the beg or end, return an &lt;li&gt; from todoparser
-          else {
-            html += todosParser(subTodo)
-          }
-        }
-      }
-    }
-  }
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">todosParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">));</span>
+  <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="p">}</span>
 
-  else {
-    html += todoCreator(todos)
-  }
-  return html;
-}
+<span class="kd">function</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//recursively builds html to append to #todos UL</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">a</span> <span class="o">&lt;</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">a</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">todo</span> <span class="o">=</span> <span class="nx">todos</span><span class="p">[</span><span class="nx">a</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+      <span class="c1">//builds up the inner arrays if subTodo exists</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">b</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">subTodo</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">[</span><span class="nx">b</span><span class="p">];</span>
+          <span class="c1">//if this is the beginning of a subTodo array, add &lt;ul&gt; to the front</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="s1">'&lt;ul&gt;'</span>
+          <span class="p">}</span>
+          <span class="c1">//if this is the end of a subTodo array, add &lt;/ul&gt; to the back</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">==</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">subTodo</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;/ul&gt;'</span>
+          <span class="p">}</span>
+          <span class="c1">//this this isnt the beg or end, return an &lt;li&gt; from todoparser</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">subTodo</span><span class="p">)</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-function todoCreator(todo) {
-  let completed = todo.completed ? "class='todo completed'" : "class='todo'"
-  let completeTodoButton = `&lt;button id="complete-todo"&gt;`;
-  if (todo.completed) {
-    completeTodoButton += `(*)&lt;/button&gt;`
-    //only inserts button IF subTodos are all complete or non-existant
-  } else if (todo.subTodos.filter(e=&gt;e.completed).length === todo.subTodos.length) {
-    completeTodoButton += `()&lt;/button&gt;`
-  } else {
-    completeTodoButton = '';
-  }
-  return (
-  `&lt;li id="${todo.id}" ${completed}&gt;` +
-    `${completeTodoButton} ${todo.title}` +
-    `&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;` +
-    `&lt;button id="add-sub-todos-btn"&gt;add sub-todos&lt;/button&gt;` +
-  `&lt;/li&gt;`
-  )
-}
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">html</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span> <span class="p">?</span> <span class="s2">"class='todo completed'"</span> <span class="p">:</span> <span class="s2">"class='todo'"</span>
+  <span class="kd">let</span> <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s2">`&lt;button id="complete-todo"&gt;`</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`(*)&lt;/button&gt;`</span>
+    <span class="c1">//only inserts button IF subTodos are all complete or non-existant</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">e</span><span class="o">=&gt;</span><span class="nx">e</span><span class="p">.</span><span class="nx">completed</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`()&lt;/button&gt;`</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span>
+  <span class="s2">`&lt;li id="</span><span class="p">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">" </span><span class="p">${</span><span class="nx">completed</span><span class="p">}</span><span class="s2">&gt;`</span> <span class="o">+</span>
+    <span class="s2">`</span><span class="p">${</span><span class="nx">completeTodoButton</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">`</span> <span class="o">+</span>
+    <span class="s2">`&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;`</span> <span class="o">+</span>
+    <span class="s2">`&lt;button id="add-sub-todos-btn"&gt;add sub-todos&lt;/button&gt;`</span> <span class="o">+</span>
+  <span class="s2">`&lt;/li&gt;`</span>
+  <span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 

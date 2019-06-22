@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -24,16 +31,17 @@
 
 <h4 id="improving-run-with-debugger">Improving Run With Debugger</h4>
 <p>Rewrite runWithDebugger so it can take an optional array that contains any arguments you want to pass into the callback function.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function runWithDebugger(callback, array) {
-    debugger;
-    if (array.length &gt;= 0) {return callback(...array);} {return callback();}
-}
 
-function sayFullName(first,last) {
-    console.log(first + ' ' + last);
-}
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">runWithDebugger</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">debugger</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">callback</span><span class="p">(...</span><span class="nx">array</span><span class="p">);}</span> <span class="p">{</span><span class="k">return</span> <span class="nx">callback</span><span class="p">();}</span>
+<span class="p">}</span>
 
-runWithDebugger(sayFullName, ['gordon', 'zhu']); // 'gordon zhu'
+<span class="kd">function</span> <span class="nx">sayFullName</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span><span class="nx">last</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">first</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="nx">last</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">runWithDebugger</span><span class="p">(</span><span class="nx">sayFullName</span><span class="p">,</span> <span class="p">[</span><span class="s1">'gordon'</span><span class="p">,</span> <span class="s1">'zhu'</span><span class="p">]);</span> <span class="c1">// 'gordon zhu'</span>
 </code></pre></div></div>
 
 <h4 id="writing-a-library-system--creating-libraries-out-of-order">Writing a library system + creating libraries out of order</h4>

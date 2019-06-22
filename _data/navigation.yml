@@ -1,4 +1,6 @@
 - name: Home
   link: ../
 - name: Blog
-  link: /blog.html
+  link: /index.html
+- name: LinkedIn
+  link: https://www.linkedin.com/in/jordan-b-vidrine/

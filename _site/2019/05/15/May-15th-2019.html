@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -38,60 +45,60 @@
 
 <p>I ran the following code a couple of times through the chrome debugger and was able to understand it.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Matrix {
-  constructor(width, height, element = (x, y) =&gt; undefined) {
-    this.width = width;
-    this.height = height;
-    this.content = [];
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Matrix</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="p">[];</span>
 
-    for (let y = 0; y &lt; height; y++) {
-      for (let x = 0; x &lt; width; x++) {
-        this.content[y * width + x] = element(x, y);
-      }
-    }
-  }
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">height</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">width</span> <span class="o">+</span> <span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-  get(x, y) {
-    return this.content[y * this.width + x];
-  }
-  set(x, y, value) {
-    this.content[y * this.width + x] = value;
-  }
-}
-class MatrixIterator {
-  constructor(matrix) {
-    this.x = 0;
-    this.y = 0;
-    this.matrix = matrix;
-  }
+  <span class="kd">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">x</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="kd">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">MatrixIterator</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">matrix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span> <span class="o">=</span> <span class="nx">matrix</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  next() {
-    if (this.y == this.matrix.height) return {done: true};
+  <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="na">done</span><span class="p">:</span> <span class="kc">true</span><span class="p">};</span>
 
-    let value = {x: this.x,
-                 y: this.y,
-                 value: this.matrix.get(this.x, this.y)};
-    this.x++;
-    if (this.x == this.matrix.width) {
-      this.x = 0;
-      this.y++;
-    }
-    return {value, done: false};
-  }
-}
+    <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+                 <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+                 <span class="na">value</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">)};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="nx">value</span><span class="p">,</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-Matrix.prototype[Symbol.iterator] = function() {
-  return new MatrixIterator(this);
-};
+<span class="nx">Matrix</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">MatrixIterator</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">};</span>
 
-let matrix = new Matrix(2, 2, (x, y) =&gt; `value ${x},${y}`);
-for (let {x, y, value} of matrix) {
-  console.log(x, y, value);
-}
-// → 0 0 value 0,0
-// → 1 0 value 1,0
-// → 0 1 value 0,1
-// → 1 1 value 1,1
+<span class="kd">let</span> <span class="nx">matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">`value </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">,</span><span class="p">${</span><span class="nx">y</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="p">{</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">value</span><span class="p">}</span> <span class="k">of</span> <span class="nx">matrix</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// → 0 0 value 0,0</span>
+<span class="c1">// → 1 0 value 1,0</span>
+<span class="c1">// → 0 1 value 0,1</span>
+<span class="c1">// → 1 1 value 1,1</span>
 
 </code></pre></div></div>
 

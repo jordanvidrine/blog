@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -29,46 +36,46 @@
 
 <p>I am a little proud of writing these two functions:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>formValidator(){
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">formValidator</span><span class="p">(){</span>
 
-  let needsToBeCorrected = [];
+  <span class="kd">let</span> <span class="nx">needsToBeCorrected</span> <span class="o">=</span> <span class="p">[];</span>
 
-  //creates an array populated with each form field that is not properly filled out
-  for (let info in this.state.customerInfo) {
-    //email validator
-    if (info === 'email') {
-      if (!validator.validate(this.state.customerInfo[info])) {
-        needsToBeCorrected.push(info);
-      }
-    //skip the 'isValid' info in the state
-    } else if (info === 'isValid') {
-    } else {
-      if (this.state.customerInfo[info] === '')
-        needsToBeCorrected.push(info)
-      }
-    }
+  <span class="c1">//creates an array populated with each form field that is not properly filled out</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">info</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//email validator</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">info</span> <span class="o">===</span> <span class="s1">'email'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">validator</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">[</span><span class="nx">info</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="c1">//skip the 'isValid' info in the state</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">info</span> <span class="o">===</span> <span class="s1">'isValid'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">[</span><span class="nx">info</span><span class="p">]</span> <span class="o">===</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
 
-  //tests to see if the array with form fields needing correction is 0
-  //which would mean the form is correctly filled out
-  if (needsToBeCorrected.length === 0) {
-    this.setState({
-      ...this.state,
-      customerInfo: {
-        ...this.state.customerInfo,
-        needsToBeCorrected,
-        isValid: true,
-      }})
-    //if it needs correcting, save the state
-    } else if (needsToBeCorrected.length !== 0) {
-      this.setState({
-        ...this.state,
-        customerInfo: {
-          ...this.state.customerInfo,
-          needsToBeCorrected,
-          isValid: false,
-        }})
-    }
-}
+  <span class="c1">//tests to see if the array with form fields needing correction is 0</span>
+  <span class="c1">//which would mean the form is correctly filled out</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+      <span class="na">customerInfo</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">,</span>
+        <span class="nx">needsToBeCorrected</span><span class="p">,</span>
+        <span class="na">isValid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">}})</span>
+    <span class="c1">//if it needs correcting, save the state</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">customerInfo</span><span class="p">:</span> <span class="p">{</span>
+          <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">,</span>
+          <span class="nx">needsToBeCorrected</span><span class="p">,</span>
+          <span class="na">isValid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="p">}})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>The above function is run once ‘next’ is clicked. The following is rendered underneath the component if isValid remains false.</p>

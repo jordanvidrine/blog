@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -23,46 +30,47 @@
 <p>Today I worked mostly on the last two ‘beast’ exercises from <a href="https://watchandcode.com/">watch and code premium.</a> I spent a lot of time in the debugger with this one, but I finally got it. I essentially split the number given to the function into a ‘left’ and ‘right’ side of the decmial.</p>
 
 <h4 id="rewrite-accounting-js-tofixed-method-using-only-string-manipulation">Rewrite Accounting JS toFixed() method using only string manipulation</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function myToFixed(number,precision) {
-  let numToStr = number.toString();
-    //checks to see if number was passed with a decimal
-    if (!numToStr.split('').includes('.')) {
-      numToStr = numToStr + '.0'
-    }
-  let leftSide = numToStr.split('.')[0];
-  let rightSide = numToStr.split('.')[1];
-  let preciseNumber = '';
 
-  //handles right side of decimal place if its length is greater than the precision
-  if (rightSide.split('').length &gt; precision) {
-    //addes an additional number to the right side, to round the precision number up or down
-    rightSide = rightSide.split('').splice(0,precision+1);
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myToFixed</span><span class="p">(</span><span class="nx">number</span><span class="p">,</span><span class="nx">precision</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">numToStr</span> <span class="o">=</span> <span class="nx">number</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="c1">//checks to see if number was passed with a decimal</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">numToStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'.'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">numToStr</span> <span class="o">=</span> <span class="nx">numToStr</span> <span class="o">+</span> <span class="s1">'.0'</span>
+    <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">numToStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">let</span> <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">numToStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="kd">let</span> <span class="nx">preciseNumber</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
 
-    //defines the last number (rightSideLeft) and the
-    //number to use to round the last number up or down (rightSideRight)
-    let numToRound= rightSide[rightSide.length-2]
-    let rounder = rightSide[rightSide.length-1]
+  <span class="c1">//handles right side of decimal place if its length is greater than the precision</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">rightSide</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">precision</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//addes an additional number to the right side, to round the precision number up or down</span>
+    <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">precision</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
 
-    //if rounder is greater than 4 increase numToRound by 1
-    if (Number(rounder) &gt; 4) {
-      numToRound = (Number(numToRound) + 1).toString();
-    } else {
-      numToRound = (Number(numToRound)).toString();
-    }
-    // create the new 'rightSide' of the decimal and add
-    // the rounded number as the last element
-    rightSide = rightSide.splice(0,precision-1).concat([numToRound]).join('')
-    //add the left and ride side with a '.' between them to
-    //give the rounded number back to user
-    preciseNumber = leftSide + '.' + rightSide
-  //if the right side is less than the precision number pad with '0s'
-  } else {
-    let padding = Array(precision - rightSide.length).fill(0)
-    rightSide = rightSide.split('').concat(padding).join('');
-    preciseNumber = leftSide + '.' + rightSide;
-  }
-  return preciseNumber;
-  }
+    <span class="c1">//defines the last number (rightSideLeft) and the</span>
+    <span class="c1">//number to use to round the last number up or down (rightSideRight)</span>
+    <span class="kd">let</span> <span class="nx">numToRound</span><span class="o">=</span> <span class="nx">rightSide</span><span class="p">[</span><span class="nx">rightSide</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="kd">let</span> <span class="nx">rounder</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">[</span><span class="nx">rightSide</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1">//if rounder is greater than 4 increase numToRound by 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">rounder</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">numToRound</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">numToRound</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">numToRound</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">numToRound</span><span class="p">)).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// create the new 'rightSide' of the decimal and add</span>
+    <span class="c1">// the rounded number as the last element</span>
+    <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">precision</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nx">concat</span><span class="p">([</span><span class="nx">numToRound</span><span class="p">]).</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+    <span class="c1">//add the left and ride side with a '.' between them to</span>
+    <span class="c1">//give the rounded number back to user</span>
+    <span class="nx">preciseNumber</span> <span class="o">=</span> <span class="nx">leftSide</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="nx">rightSide</span>
+  <span class="c1">//if the right side is less than the precision number pad with '0s'</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">precision</span> <span class="o">-</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">padding</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">preciseNumber</span> <span class="o">=</span> <span class="nx">leftSide</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="nx">rightSide</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">preciseNumber</span><span class="p">;</span>
+  <span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="nested-todo-app">Nested ‘Todo’ App</h4>

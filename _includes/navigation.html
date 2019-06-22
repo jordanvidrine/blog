@@ -1,5 +1,8 @@
 <nav>
   {% for item in site.data.navigation %}
+  {%if item.external_url %}
+    <a href="{{item.external_url}}">{{item.name}}</a>
+    {%endif%}
     <a href="{{item.link | relative_url}}" {% if page.url == item.link %}class="current"{% endif %}>
       {{item.name}}
     </a>

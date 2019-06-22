@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -32,14 +39,14 @@
     <p>A double negation ie. <code class="highlighter-rouge">!!value</code> will coerce it into a real boolean if the value isn’t something immediately convertible into a true/false value ie. !!undefined = false</p>
   </li>
   <li>
-    <p>This return syntax is a little complicated to me
-```
-   ///true or false??     OR   ???   how can you return true or false OR another true or false
-return newValue === oldValue || (typeof newValue === ‘number’ &amp;&amp; typeof oldValue === ‘number’  &amp;&amp; isNaN(newValue) &amp;&amp; isNaN(oldValue));</p>
+    <p>This return syntax is a little complicated to me</p>
   </li>
 </ol>
 
-<p>```</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c1">///true or false??     OR   ???   how can you return true or false OR another true or false</span>
+<span class="k">return</span> <span class="nx">newValue</span> <span class="o">===</span> <span class="nx">oldValue</span> <span class="o">||</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">newValue</span> <span class="o">===</span> <span class="s1">'number'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">oldValue</span> <span class="o">===</span> <span class="s1">'number'</span>  <span class="o">&amp;&amp;</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">oldValue</span><span class="p">));</span>
+
+</code></pre></div></div>
 
 <p>The issues we are dealing with in this chapter is creating a ‘watcher’ that will invoke a function if that item it is watching is changed. If the item happens to be an array or object, it is necessary (if the user specifies) to check each value in that object or array.</p>
 

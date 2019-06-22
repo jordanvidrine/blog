@@ -2,23 +2,1963 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Jekyll Test Home</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Blog</title>
+    <link rel="stylesheet" href="/assets/css/blog-styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+  </head>
   </head>
   <body>
-    <nav>
+    <div id='title-nav'>
+      <h1>Latest Entries</h1>
+      <nav>
+  
   
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
 
-    <h1>hello world!</h1>
+    </div>
+    <div id="posts">
+  <ul>
+    
+    <li>
+      <h2>June 21st 2019</h2>
+      <p><p>Today I migrated my coding journey repository of .MD files to a github page using jekyll. It really wasnt too complicated after reading the docs and following the walkthrough to how it works. I’ve been wanting to implement the blogging functionality to my coding log and am glad to be able to finally do it. I can now update my log from any of my computers using the git features in atom.</p>
+
+<p>Take a look at it <a href="https://jordanvidrine.github.io/blog">here</a></p>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 20th 2019</h2>
+      <p><p>I’ve been feeling like my front end skills (CSS) are a little lacking so I think I’ll try and start working through the <a href="https://100dayscss.com/?dayIndex=1">100 days of css</a> challenges in my spare coding time.</p>
+
+<p>I looked over the first one today and was able to understand some of the more complex css like animations and keyframes and such. I used a .scss file and got a little more familiar with the syntax of that as well, using variables to help my code along. It is pretty much an exact copy of the code to match. I definitely could not solve this without looking over the solution.</p>
+
+<p class="codepen" data-height="428" data-theme-id="light" data-default-tab="css,result" data-user="jordanvidrine" data-slug-hash="jjyKYB" data-preview="true" style="height: 428px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="100 Days of CSS #1">
+  <span>See the Pen <a href="https://codepen.io/jordanvidrine/pen/jjyKYB/">
+  100 Days of CSS #1</a> by Jordan Vidrine (<a href="https://codepen.io/jordanvidrine">@jordanvidrine</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async="" src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+</p>
+    </li>
+    
+    <li>
+      <h2>June 19th 2019</h2>
+      <p><p>Spent the first part of the day working through Eloquent Javascript chapters 8-9 on error handling and the dreaded regex. Not a huge fan of working with regex as it is pretty confusing but I do understand it and its purposes.</p>
+
+<h4 id="continued-working-on-nodejs-course">Continued working on Node.js Course</h4>
+<p>In the course today I went through more of using express inside of node. It is starting to get a little complex, which I like because it causes me to stretch my thinking and helps me to not get bored.</p>
+
+<p>The task was to create a basic app front end and backend. In the backend we created a .get(‘/weather’) route where we send a search query and we are returned the weather info in JSON for what we entered in. Here’s what that looked like.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/weather'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="na">error</span><span class="p">:</span> <span class="s2">"You must provide an address!"</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+  <span class="c1">//run geocode function, passing in the address from the browser</span>
+  <span class="nx">geocode</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">data</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">//return error message if no address was entered</span>
+      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">error</span><span class="p">})</span>
+    <span class="p">}</span>
+    <span class="c1">//if geocode worked correctly, then use the data from it to</span>
+    <span class="c1">//invoke the forecast function</span>
+    <span class="nx">forecast</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">latitude</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">longitude</span><span class="p">,</span> <span class="p">(</span><span class="nx">forecastError</span><span class="p">,</span> <span class="nx">forecastData</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">forecastError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">error</span><span class="p">})</span>
+      <span class="p">}</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">city</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">location</span><span class="p">,</span>
+        <span class="na">forecast</span><span class="p">:</span><span class="nx">forecastData</span><span class="p">,</span>
+        <span class="s1">'Search Provided'</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+      <span class="p">})</span>
+    <span class="p">})</span>
+  <span class="p">});</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>For the front-end we use fetch to make a call to that get route we established with express on the backend. Here is how that looks.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getWeather</span><span class="p">(</span><span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="s1">'http://localhost:3000/weather?address='</span><span class="o">+</span><span class="nx">address</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">infoHtml</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'weatherInfo'</span><span class="p">)</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">infoHtml</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">infoHtml</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`The weather in </span><span class="p">${</span><span class="nx">data</span><span class="p">[</span><span class="s1">'Search Provided'</span><span class="p">]}</span><span class="s2"> is: </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">forecast</span><span class="p">}</span><span class="s2">`</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">weatherForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'form'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">search</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'input'</span><span class="p">)</span>
+
+<span class="nx">weatherForm</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'submit'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+  <span class="kd">let</span> <span class="nx">location</span> <span class="o">=</span> <span class="nx">search</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">getWeather</span><span class="p">(</span><span class="nx">location</span><span class="p">);</span>
+  <span class="nx">search</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>I also played around a bit further and discovered a pretty great API <a href="https://www.worldtradingdata.com/">World Trading Data</a>.</p>
+
+<p>Here’s something I am playing around with with that.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">//path names</span>
+<span class="kd">const</span> <span class="nx">publicDirectoryPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../public'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">viewsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/views'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">partialsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/partials'</span><span class="p">)</span>
+
+<span class="c1">//specifies what directory to use for "/" get path</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">publicDirectoryPath</span><span class="p">))</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'view engine'</span><span class="p">,</span> <span class="s1">'hbs'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'views'</span><span class="p">,</span> <span class="nx">viewsPath</span><span class="p">);</span>
+<span class="nx">hbs</span><span class="p">.</span><span class="nx">registerPartials</span><span class="p">(</span><span class="nx">partialsPath</span><span class="p">)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Stocks Info App'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">getStock</span><span class="p">(</span><span class="nx">symbol</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">STOCK_URL</span> <span class="o">+</span> <span class="nx">symbol</span> <span class="o">+</span> <span class="nx">STOCK_KEY</span><span class="p">,</span> <span class="na">json</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="s1">'ERROR'</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/stock'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">stock</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="na">error</span><span class="p">:</span><span class="s1">'You must provide a stock symbol!'</span><span class="p">})</span>
+
+  <span class="nx">getStock</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">stock</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'error'</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 18th 2019</h2>
+      <p><p>I finished the Drum Machine React App and uploaded it <a href="https://jordanvidrine.github.io/drumMachine/index.html">here</a>. I am pretty proud of the way it came out as well. It was cool to finish this without really encountering any issues. I learned more about mouse and click events creating the app, but other than that, it was really easy.</p>
+
+<h4 id="other-activities">Other Activities</h4>
+<p>Continued learning Node.js with a udemy course. Went through using routes and began learning the basics of the Express NPM module. Used that and handlebars ‘hbs’ in Node to go through a nice templating tutorial with custom routes.</p>
+
+<p>Here is the JS for that</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">)</span> <span class="c1">//lets you specify path directorys</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">hbs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'hbs'</span><span class="p">);</span> <span class="c1">//for partials</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">publicDirectoryPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../public'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">viewsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/views'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">partialsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/partials'</span><span class="p">)</span>
+
+<span class="c1">//to use a different name than views for your templates engine</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'view engine'</span><span class="p">,</span> <span class="s1">'hbs'</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'views'</span><span class="p">,</span> <span class="nx">viewsPath</span><span class="p">)</span>
+<span class="nx">hbs</span><span class="p">.</span><span class="nx">registerPartials</span><span class="p">(</span><span class="nx">partialsPath</span><span class="p">)</span>
+
+<span class="c1">//create and render a 404 page with hanldebars</span>
+<span class="c1">//setup the template to render header and footer</span>
+<span class="c1">//set up to render error message in paragraph</span>
+<span class="c1">//page not found</span>
+<span class="c1">//help article not found</span>
+
+<span class="c1">//specifies what directory to use for "/" get path</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">publicDirectoryPath</span><span class="p">))</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">//renders the view with the name you put in</span>
+  <span class="c1">//as well as on object of values for the view to access</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Weather'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/about'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'about'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'About Page'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/help'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'help'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Help Page'</span><span class="p">,</span>
+    <span class="na">helpText</span><span class="p">:</span> <span class="s1">'Do you need any help?'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/weather'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+    <span class="na">forecast</span><span class="p">:</span> <span class="s1">'Not so great'</span><span class="p">,</span>
+    <span class="na">location</span><span class="p">:</span> <span class="s1">'Eunice, LA'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span><span class="p">,</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Weather'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/help/*'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'404'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'404 Error! Page'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span><span class="p">,</span>
+    <span class="na">errorMessage</span><span class="p">:</span> <span class="s1">'Oops! This help article doesnt exist!'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">//matches anything that hasnt been matched so far 404 Error</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'*'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'404'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'404 Error! Page'</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'Jordan Vidrine'</span><span class="p">,</span>
+    <span class="na">errorMessage</span><span class="p">:</span> <span class="s1">'Oops! This page doesnt exist!'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Server is up on port 3000'</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">)</span>
+
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 17th 2019</h2>
+      <p><p>I started off the day working on the Drum Machine App I began work on last week. I implemented a click and drag volume knob, as well as the ability to hover over the knob and increase/decrease the volume with the mouse wheel.</p>
+
+<p>I added audio elements to each pad, that when clicked will trigger the corresponding audio sample for the pad.</p>
+
+<p>On the back end I added to the state a sound bank of 3 different kits the user will be able to choose from.</p>
+
+<h4 id="heres-the-app-in-action-so-far">Here’s the app in action so far</h4>
+<p><img src="https://raw.githubusercontent.com/jordanvidrine/coding-journey/master/Daily%20Logs/files/drumMachine.gif" alt="Drum Machine Example" /></p>
+
+<h4 id="nodejs-coursework">NodeJs Coursework</h4>
+<p>I also went through a couple lessons on the node js course I am taking. Getting more familiar with the way node works is pretty fun and I am eager to continue my learning. Something I worked on today was making https requests using the ‘Request’ NPM package. The lesson covered sending requests to mapboc to retrieve longitude and latitude, then sending that to darksky to request the weather data.</p>
+
+<h5 id="example-code">Example Code</h5>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// FORECAST MODULE ///</span>
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">weatherUrl</span> <span class="o">=</span> <span class="s1">'https://api.darksky.net/forecast/bbc5c80a6e38213f7e85183e81ee1fa7/'</span>
+
+<span class="kd">var</span> <span class="nx">forecast</span> <span class="o">=</span> <span class="p">(</span><span class="nx">latitude</span><span class="p">,</span> <span class="nx">longitude</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">weatherUrl</span> <span class="o">+</span> <span class="o">+</span> <span class="nx">latitude</span> <span class="o">+</span><span class="s2">","</span><span class="o">+</span> <span class="nx">longitude</span><span class="p">;</span>
+  <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">json</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="s1">'Could not connect to weather API'</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">currently</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span><span class="s2">`</span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">summary</span><span class="p">}</span><span class="s2">. The current temperature is </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">temperature</span><span class="p">}</span><span class="s2"> degrees, with a </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">precipProbability</span><span class="p">}</span><span class="s2">% chance of rain.`</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">forecast</span>
+
+
+<span class="c1">/// GEOCODE MODULE ///</span>
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">mapUrlBeg</span> <span class="o">=</span> <span class="s2">"https://api.mapbox.com/geocoding/v5/mapbox.places/"</span>
+<span class="kd">const</span> <span class="nx">mapUrlEnd</span> <span class="o">=</span> <span class="s2">".json?access_token=pk.eyJ1Ijoiam9yZGFudmlkcmluZSIsImEiOiJjanZjdGw5NHIwMXc4NDRwbmg3cHNyM3Q0In0.EoAg-ZKQSmDqilHZQELSBA&amp;limit=1"</span>
+
+<span class="kd">var</span> <span class="nx">geocode</span> <span class="o">=</span> <span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">mapUrlBeg</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">address</span><span class="p">)</span> <span class="o">+</span> <span class="nx">mapUrlEnd</span><span class="p">;</span>
+  <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span> <span class="na">json</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="s1">'Unable to connect to location services'</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">features</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="s1">'Unable to find location. Try another search.'</span><span class="p">,</span><span class="kc">undefined</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">latitude</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="na">longitude</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="na">location</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">place_name</span><span class="p">,</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">geocode</span>
+
+
+<span class="c1">/// MAIN APP ///</span>
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">geocode</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./utils/geocode'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">forecast</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./utils/forecast'</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="p">{</span>
+  <span class="nx">geocode</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">forecast</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">latitude</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">longitude</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forecastData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">location</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">forecastData</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">});</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Please input a city to search for'</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h4 id="other-activities">Other Activities</h4>
+<p>I made a daily coding todo-list for the next couple of months until I feel ready to move onto something more complex. My Daily schedule will somewhat look like this:</p>
+<ol>
+  <li>2 Hrs of Application/Pet Project</li>
+  <li>2 Hrs of NodeJS course work (working through <a href="https://www.udemy.com/share/10007CA0oYdVtVRn4=/">this at the moment</a>)</li>
+  <li>2 Hours of React w/ Redux course work (I feel confident in react, but want to go through another course) (<a href="https://www.udemy.com/react-redux/learn/lecture/12531044?start=0#overview">here</a>)</li>
+  <li>1 Hour of Eloquent Javascript</li>
+  <li>1 Hour of ‘Build your own Angular’</li>
+</ol>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 12th 2019</h2>
+      <p><p>Super productive day for me today. I went back to my Pomodoro App and finalized the look of it, as well as updated some of the code. Since I now know how to create React Apps without the bulk of installing a ton of node packages, I was able to re-format my code to upload onto my new github portfolio.</p>
+
+<h4 id="portfolio">Portfolio</h4>
+<p>My portfolio is now up with 3 apps!
+<img src="https://i.postimg.cc/KzYcqJYK/Screenshot-2019-06-12-Jordan-Vidrine-Web-Dev.png" alt="Jordan Vidrine's Portfolio" /></p>
+
+<h4 id="drum-app">Drum App</h4>
+<p>I began working today on a Drum Machine app as well. I implemented the ability to ‘press’ the drum pads with QWER and ASDF on the keyboard. I also figured out how to increase or decrease volume based on the mouseup, mousedown, and mousemove events.
+<img src="https://i.postimg.cc/520VM6VG/Screenshot-2019-06-12-Drum-Machine-App.png" alt="Drum App" /></p>
+
+<p>Here is the code I used to increase and decrease volume, with a min of 0 and max of 100.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keydown'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleKeyPress</span><span class="p">);</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keyup'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleKeyUp</span><span class="p">);</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'mouseup'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseUp</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">handleMouseDown</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'mousemove'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span><span class="p">);</span>
+   <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+     <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+     <span class="c1">//this sets the original click position, used by mousemove as a base to increase or decrease volume by</span>
+     <span class="na">mouseDown</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span>
+   <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">handleMouseUp</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'mousemove'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleMouseMove</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">handleMouseMove</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="kd">let</span> <span class="nx">volume</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">volume</span><span class="p">;</span>
+  <span class="nx">volume</span> <span class="o">=</span> <span class="nx">volume</span> <span class="o">+</span> <span class="p">((</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">mouseDown</span><span class="p">)</span> <span class="o">/</span> <span class="mi">50</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">updatedVolume</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">volume</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">volume</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">updatedVolume</span> <span class="o">=</span> <span class="nx">volume</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">volume</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">updatedVolume</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">updatedVolume</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+    <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+    <span class="na">volume</span><span class="p">:</span> <span class="nx">updatedVolume</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>After this project, I will move forward with learning Node and a back end database like mySQL or mongoDB.</p>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 11th 2019</h2>
+      <p><p>Today I finished the calculator app to the best of my ability. I fixed all of the issues I had with it and it is now complete. Worked through chapter 3 of Build your Own Angular.</p>
+
+<p>Began working on the Drum Machine App</p>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 10th 2019</h2>
+      <p><p>Man, is this year flying by! I’ve got to put some time into my artspark project so this week will be a slow one for me coding-wise. This morning I wrote a little script to help my wife pick a winner for a drawing she did with her business. We had 266 email submissions as well as another 50+ Facebook &amp; Instagram submissions.</p>
+
+<p>I used a <a href="https://csvjson.com/csv2json">CSV to JSON converter</a> to parse through the email list and convert that into an array of names. We then added to that array by using a simple html input I made. We entered the user name, and the amount of submission, and the submit button would push that (x) amount of times into the array of submits.</p>
+
+<p>I then picked a random user from the array with the simple<code class="highlighter-rouge">Math.floor(Math.random()*array.length)</code></p>
+
+<p>I also updated the styling of my calculator app, and reformatted my LinkedIn profile and resume to reflect my current career path.</p>
+
+<h4 id="calculator-update">Calculator update</h4>
+<p>Got to work on this for awhile tonight and encountered multiple bugs. Pressing “=” when current input or formula evaluated to 0 resulted in NaN. I fixed that. I am also implementing the ability to more intelligently use the decimal place. In the past I treated it as an operator and would not allow it after a regular operator symbol.</p>
+
+<p>Now pressing “.” after an operator will cause the formula to be built like such “4 + 0.” or “4 x 0.” and it will wait for the next number input to decide what the fractioned number should be.</p>
+
+<p>Other Issues I need to work on:</p>
+<ol>
+  <li>Need to STOP the entering of multiple decimals in a number</li>
+  <li>Need to add “0.” to formula and current input when “.” is pressed for the first time after “=” or operator</li>
+  <li>Need to stop number from getting too large for its Screen</li>
+  <li>An operator should not be able to be entered right after a “.” press</li>
+</ol>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 5th 2019</h2>
+      <p><p>Today I spent the majority of my time coding a calculator app using a basic react setup. It was the first time I used react without installing create-react-app with npm. It was super minimal and fun to work with. I used an npm jsx converter while working on it for the desktop version. The app.js file used online is actually the converted app.js I made using JSX.</p>
+
+<p>The app is actually now live <a href="https://jordanvidrine.github.io/calculator/index.html">here!</a></p>
+
+<p>And the code is <a href="https://github.com/jordanvidrine/jordanvidrine.github.io/tree/master/calculator">here!</a></p>
+
+<p>I also created myself a github webpage as apart of this process. I will be posting my apps and projects online now to act as a portfolio of sorts. That is here <a href="https://jordanvidrine.github,io">jordanvidrine.github.io</a></p>
+</p>
+    </li>
+    
+    <li>
+      <h2>June 4th 2019</h2>
+      <p><p>I worked more today on the nested todo app, which is now live <a href="https://jordanvidrine.github.io">here.</a> I styled it and added the ability to edit todos.</p>
+
+</p>
+    </li>
+    
+    <li>
+      <h2>June 3rd 2019</h2>
+      <p><p>Spent the first half of the day going through 3/4 of chapter two of ‘Build your own AngularJS.’ Getting used to looking at fairly complex code and running a lot of functions in the jasmine debugger to see what exactly is going on behind the scenes.</p>
+
+<p>Again, this isn’t to learn angular or any library in particular, but to get comfortable reading, writing, and understanding complex code.</p>
+
+<h4 id="second-half">Second half</h4>
+<p>I FINALLY finished and figured out my nested todos app exercise from the Watch and Code premium course. It wasnt that it was extremely complex, just figuring out which direction to take to get the job done was tough. I eventually went with a recursive reduce function to “render” the html of the todo list with its nested todos to the page.</p>
+
+<p>I am super proud of myself for being able to figure this one out!</p>
+
+<p>Heres how it looks:
+<img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/nested-todos-example_2.png" alt="nested todos app" /></p>
+
+<p>And here is some of the code:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">todoParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">));</span>
+  <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">todoParser</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span><span class="nx">currentValue</span><span class="p">,</span><span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//add the current element to the accumulator html as the first LI tag</span>
+            <span class="c1">//accumulator += `&lt;li&gt;${currentValue.title}&lt;/li&gt;`;</span>
+            <span class="nx">accumulator</span> <span class="o">+=</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">currentValue</span><span class="p">);</span>
+            <span class="c1">//check if the current element has subTodos</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">currentValue</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+              <span class="c1">//if it does, recurse through the subTodo array</span>
+              <span class="nx">accumulator</span> <span class="o">+=</span> <span class="nx">todoParser</span><span class="p">(</span><span class="nx">currentValue</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">);</span>
+              <span class="c1">//once thats done, check if this is the last element of its array</span>
+              <span class="c1">//if it is, add a closing UL tag to end the section</span>
+			        <span class="k">if</span> <span class="p">(</span><span class="nx">idx</span> <span class="o">==</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+              	<span class="nx">accumulator</span> <span class="o">+=</span> <span class="s2">`&lt;/ul&gt;`</span><span class="p">;</span>
+              	<span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	                <span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span>
+			          <span class="p">}</span>
+            <span class="p">}</span> <span class="c1">//if current element does NOT have subTodos, just check if its the last element</span>
+              <span class="c1">//and add a closing UL tag, if not, return the accumulator</span>
+              <span class="k">else</span> <span class="p">{</span>
+  			        <span class="k">if</span> <span class="p">(</span><span class="nx">idx</span> <span class="o">==</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                	<span class="nx">accumulator</span> <span class="o">+=</span> <span class="s2">`&lt;/ul&gt;`</span><span class="p">;</span>
+                	<span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                	<span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span>
+				          <span class="p">}</span>
+              <span class="p">}</span>
+        <span class="p">},</span> <span class="s1">'&lt;ul&gt;'</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span> <span class="p">?</span> <span class="s2">"class='todo completed'"</span> <span class="p">:</span> <span class="s2">"class='todo'"</span>
+  <span class="kd">let</span> <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s2">`&lt;button id="complete-todo"&gt;`</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`(*)&lt;/button&gt;`</span>
+    <span class="c1">//only inserts button IF subTodos are all complete or non-existant</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">e</span><span class="o">=&gt;</span><span class="nx">e</span><span class="p">.</span><span class="nx">completed</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`()&lt;/button&gt;`</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span>
+  <span class="s2">`&lt;li id="</span><span class="p">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">" </span><span class="p">${</span><span class="nx">completed</span><span class="p">}</span><span class="s2">&gt;`</span> <span class="o">+</span>
+    <span class="s2">`</span><span class="p">${</span><span class="nx">completeTodoButton</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2"> `</span> <span class="o">+</span>
+    <span class="s2">`&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;`</span> <span class="o">+</span>
+    <span class="s2">`&lt;button id="add-sub-todos-btn"&gt;add sub-todo&lt;/button&gt;`</span> <span class="o">+</span>
+  <span class="s2">`&lt;/li&gt;`</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 30th 2019</h2>
+      <p><p>Spent a couple hours working back on the nested todos exercise for the Watch and Code premium users. I was excited to FIX the issue where my nested todos were rendering BEFORE their parent element.</p>
+
+<p>A couple issues still exist however:</p>
+
+<ol>
+  <li>
+    <p>I cannot nest a subTodo on an already nested todo:</p>
+
+    <p>I think the issue here is that I have a ‘findTodo’ function that runs when the addSubTodo button is clicked. I am having an issue translating the ID of the todo that is clicked, to the push method targeting the correct subTodo.</p>
+  </li>
+  <li>
+    <p>I cannot toggle a nested todo</p>
+
+    <p>I believe the issue here is similar to the above.</p>
+  </li>
+</ol>
+
+<p>Here is the code I used to fix the ordering problem:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">todosParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">));</span>
+  <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//recursively builds html to append to #todos UL</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">a</span> <span class="o">&lt;</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">a</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">todo</span> <span class="o">=</span> <span class="nx">todos</span><span class="p">[</span><span class="nx">a</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+      <span class="c1">//builds up the inner arrays if subTodo exists</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">b</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">subTodo</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">[</span><span class="nx">b</span><span class="p">];</span>
+          <span class="c1">//if this is the beginning of a subTodo array, add &lt;ul&gt; to the front</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="s1">'&lt;ul&gt;'</span>
+          <span class="p">}</span>
+          <span class="c1">//if this is the end of a subTodo array, add &lt;/ul&gt; to the back</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">==</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">subTodo</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;/ul&gt;'</span>
+          <span class="p">}</span>
+          <span class="c1">//this this isnt the beg or end, return an &lt;li&gt; from todoparser</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">subTodo</span><span class="p">)</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">html</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">todoCreator</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span> <span class="p">?</span> <span class="s2">"class='todo completed'"</span> <span class="p">:</span> <span class="s2">"class='todo'"</span>
+  <span class="kd">let</span> <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s2">`&lt;button id="complete-todo"&gt;`</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`(*)&lt;/button&gt;`</span>
+    <span class="c1">//only inserts button IF subTodos are all complete or non-existant</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">e</span><span class="o">=&gt;</span><span class="nx">e</span><span class="p">.</span><span class="nx">completed</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`()&lt;/button&gt;`</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span>
+  <span class="s2">`&lt;li id="</span><span class="p">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">" </span><span class="p">${</span><span class="nx">completed</span><span class="p">}</span><span class="s2">&gt;`</span> <span class="o">+</span>
+    <span class="s2">`</span><span class="p">${</span><span class="nx">completeTodoButton</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">`</span> <span class="o">+</span>
+    <span class="s2">`&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;`</span> <span class="o">+</span>
+    <span class="s2">`&lt;button id="add-sub-todos-btn"&gt;add sub-todos&lt;/button&gt;`</span> <span class="o">+</span>
+  <span class="s2">`&lt;/li&gt;`</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 29th 2019</h2>
+      <p><p>Went through chapter 1 of <a href="https://teropa.info/build-your-own-angular/">Build Your Own Angular</a> again to solidify the javascript examples and knowledge.</p>
+
+<p>Noticed three things that stood out for me.</p>
+
+<ol>
+  <li>
+    <p>Explicitly returning false in a LoDash forEach loop causes loDash to to exit the loop immediately.</p>
+  </li>
+  <li>
+    <p>A double negation ie. <code class="highlighter-rouge">!!value</code> will coerce it into a real boolean if the value isn’t something immediately convertible into a true/false value ie. !!undefined = false</p>
+  </li>
+  <li>
+    <p>This return syntax is a little complicated to me</p>
+  </li>
+</ol>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c1">///true or false??     OR   ???   how can you return true or false OR another true or false</span>
+<span class="k">return</span> <span class="nx">newValue</span> <span class="o">===</span> <span class="nx">oldValue</span> <span class="o">||</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">newValue</span> <span class="o">===</span> <span class="s1">'number'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">oldValue</span> <span class="o">===</span> <span class="s1">'number'</span>  <span class="o">&amp;&amp;</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">oldValue</span><span class="p">));</span>
+
+</code></pre></div></div>
+
+<p>The issues we are dealing with in this chapter is creating a ‘watcher’ that will invoke a function if that item it is watching is changed. If the item happens to be an array or object, it is necessary (if the user specifies) to check each value in that object or array.</p>
+
+<blockquote>
+  <p>Value-based dirty-checking implies that if the old or new values are objects or arrays we have to iterate through everything contained in them. If there’s any difference in the two values, the watcher is dirty. If the value has other objects or arrays nested within, those will also be recursively compared by value.</p>
+</blockquote>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 28th 2019</h2>
+      <p><p>After spending the morning organizing my ArtSpark project and putting together a project timeline with EVERYTHING I need to do, I was able to code without any distraction.</p>
+
+<p>I will be getting back to the tank/graph offshore work this Thursday. Until then I am continuing my regularly scheduled learning.</p>
+
+<p>I finished chapter 1 of this book <a href="https://teropa.info/build-your-own-angular/">Build Your Own Angular</a> as apart of the premium watch and code course I am finishing. The book is suggested reading, not to learn angular, but to learn javascript and the underlying JS in a complex framework so we can get a better grasp of all aspects of javascript.</p>
+
+<p>After finishing, I started going through it one more time to solidify some of the things happening here like Classes, passing functions to classes, creating prototypes and constructor functions, and storing data in objects created with classes.</p>
+
+<p>It is a pretty challenging read but at the same time very interesting. Through it I am also learning a lot about the Jasmine testing framework. With each new feature we implement in the book, we first write a test, then write the code to make that test pass.</p>
+
+<p>I also looked into Open Source and am interested in getting some experience with this possibly through what Mozilla has to offer.</p>
+
+<p>Here is some of the code I wrote today:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//TESTS</span>
+<span class="s1">'use strict'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">Scope</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../src/scope'</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">'Scope'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'can be constructed and used as an object'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Scope</span><span class="p">();</span>
+    <span class="nx">scope</span><span class="p">.</span><span class="nx">aProperty</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">aProperty</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s1">'digest'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">scope</span><span class="p">;</span>
+
+    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">scope</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Scope</span><span class="p">();</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'calls the listener function of a watch on first $digest'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">watchFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'wat'</span><span class="p">;};</span>
+      <span class="kd">var</span> <span class="nx">listenerFn</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">();</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="nx">watchFn</span><span class="p">,</span><span class="nx">listenerFn</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">listenerFn</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'calls the watch function with the scope as the arguments'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">watchFn</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">listenerFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">};</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="nx">watchFn</span><span class="p">,</span> <span class="nx">listenerFn</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">watchFn</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'calls the listener function when the watched value changes'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">someValue</span> <span class="o">=</span> <span class="s1">'a'</span><span class="p">;</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">someValue</span><span class="p">},</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="o">++</span><span class="p">;}</span>
+      <span class="p">);</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">someValue</span> <span class="o">=</span> <span class="s1">'b'</span><span class="p">;</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'calls listener when watch value is first undefined'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">someValue</span><span class="p">;},</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="o">++</span><span class="p">;}</span>
+      <span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">counter</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'calls listener with newValue as oldValue the first time it runs'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">someValue</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">oldValueGiven</span><span class="p">;</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">someValue</span><span class="p">;</span> <span class="p">},</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span><span class="nx">oldValueGiven</span> <span class="o">=</span> <span class="nx">oldValue</span><span class="p">;}</span>
+      <span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">oldValueGiven</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'may have watchers that omit the listener function'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">watchFn</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">().</span><span class="nx">and</span><span class="p">.</span><span class="nx">returnValue</span><span class="p">(</span><span class="s1">'something'</span><span class="p">);</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="nx">watchFn</span><span class="p">);</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">watchFn</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'triggers chained watchers in the same digest'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Jane'</span><span class="p">;</span>
+
+      <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">nameUpper</span><span class="p">;</span> <span class="p">},</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">scope</span><span class="p">.</span><span class="nx">initial</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.'</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">);</span>
+
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span>
+          <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">){</span><span class="k">return</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">name</span><span class="p">;},</span>
+          <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">scope</span><span class="p">.</span><span class="nx">nameUpper</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">);</span>
+
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">initial</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="s1">'J.'</span><span class="p">);</span>
+
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Bob'</span><span class="p">;</span>
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">$digest</span><span class="p">();</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">initial</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="s1">'B.'</span><span class="p">);</span>
+    <span class="p">});</span>
+
+  <span class="p">});</span>
+
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'use strict';
+var _ = require('lodash');
+
+function Scope() {
+  this.$$watchers = [];
+}
+
+function initWatchVal() {};
+
+Scope.prototype.$watch = function(watchFn, listenerFn) {
+  var watcher = {
+    watchFn: watchFn,
+    listenerFn: listenerFn || function(){},
+    last: initWatchVal,
+  }
+  this.$$watchers.push(watcher)
+}
+
+Scope.prototype.$digest = function() {
+  var self = this;
+  _.forEach(this.$$watchers, function(watcher) {
+    var newValue = watcher.watchFn(self);
+    var oldValue = watcher.last;
+    if (newValue !== oldValue) {
+      watcher.last = newValue;
+      watcher.listenerFn(newValue,
+        (oldValue === initWatchVal ? newValue : oldValue),
+        self);
+    }
+  });
+}
+
+module.exports = Scope;
+
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 24th 2019</h2>
+      <p><p>Today I worked more on the project for Sirius I wrote about yesterday. We will be using React as well as Recharts for React which uses d3 to create modular components for charts and graphs.</p>
+
+<p>Today I created a fake set of data to use as a test for tank levels, and tank levelhistory. I also created a random level updater to mock when we would recieve data from the server that levels have changed. Heres what it looks like (very basic.)</p>
+
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/Screenshot_2019-05-24%20React%20App.png" alt="live tank simulation" /></p>
+
+<p>Here is a bit of the code:</p>
+
+<h4 id="main-app">Main App</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Tank</span> <span class="k">from</span> <span class="s1">'./components/Tank'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TankData</span> <span class="k">from</span> <span class="s1">'./data/TankData'</span>
+<span class="k">import</span> <span class="nx">Chart</span> <span class="k">from</span> <span class="s1">'./components/Chart'</span>
+<span class="k">import</span> <span class="s1">'./app.css'</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">TankData</span><span class="p">:</span> <span class="p">[...</span><span class="nx">TankData</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">generateRandomLevels</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">generateRandomLevels</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">JSONify</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">JSONify</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">generateRandomLevels</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">tanks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">newTimeStamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">).</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+    <span class="nx">tanks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">tank</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">//save history of current water levels</span>
+      <span class="nx">tank</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">water</span><span class="p">:</span> <span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span><span class="p">,</span> <span class="na">oil</span><span class="p">:</span> <span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span><span class="p">,</span> <span class="na">timeStamp</span><span class="p">:</span> <span class="nx">tank</span><span class="p">.</span><span class="nx">timeStamp</span><span class="p">});</span>
+
+        <span class="c1">//randomize water levels</span>
+        <span class="kd">let</span> <span class="nx">randomWater</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">+</span> <span class="nx">randomWater</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">+=</span> <span class="nx">randomWater</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">-</span> <span class="nx">randomWater</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">-=</span> <span class="nx">randomWater</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+
+        <span class="c1">//randomize oil levels</span>
+        <span class="kd">let</span> <span class="nx">randomOil</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">+</span> <span class="nx">randomOil</span> <span class="o">&lt;=</span> <span class="mi">85</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">+=</span> <span class="nx">randomOil</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">-</span> <span class="nx">randomOil</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">-=</span> <span class="nx">randomOil</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="c1">//save new date to 'tank.date'</span>
+      <span class="nx">tank</span><span class="p">.</span><span class="nx">timeStamp</span> <span class="o">=</span> <span class="nx">newTimeStamp</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="c1">//save state of water levels</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">TankData</span><span class="p">:</span> <span class="p">[...</span><span class="nx">tanks</span><span class="p">]</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+
+  <span class="nx">JSONify</span><span class="p">(){</span>
+    <span class="kd">let</span> <span class="nx">dataJSON</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">history</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dataJSON</span><span class="p">)</span>
+  <span class="p">}</span>
+
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="kd">let</span> <span class="nx">tanks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">tank</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Tank</span> <span class="nx">tankInfo</span><span class="o">=</span><span class="p">{</span><span class="nx">tank</span><span class="p">}</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">tank</span><span class="p">.</span><span class="nx">tankName</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">})</span>
+
+      <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"App"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"tank-container"</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">tanks</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">generateRandomLevels</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Random</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">JSONify</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">JSONIFY</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Chart</span> <span class="nx">chartData</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">history</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="tank-component">Tank Component</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const Tank = props =&gt; {
+  let t = props.tankInfo
+
+  let waterStyles = {
+    backgroundColor: 'blue',
+    color: 'white',
+    textAlign: 'center',
+    height: (250*(t.currentH20Percent/100)),
+    width: "200px",
+  }
+
+  let oilHeight = (250*(t.currentOilPercent/100))
+
+  let oilStyles = {
+    backgroundColor: 'grey',
+    color: 'white',
+    textAlign: 'center',
+    height: oilHeight,
+    width: "200px",
+    marginTop: 250-oilHeight-(250*(t.currentH20Percent/100)),
+  }
+
+    return (
+      &lt;div&gt;
+      &lt;div id={t.tankName} className="outer-tank"&gt;
+      &lt;div className="oil-tank" style={oilStyles}&gt;
+      &lt;/div&gt;
+        &lt;div className="water-tank" style={waterStyles}&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;h2&gt;{t.tankName}&lt;/h2&gt;
+      &lt;p&gt;{t.time}&lt;/p&gt;
+      &lt;/div&gt;
+    )
+  }
+
+export default Tank
+</code></pre></div></div>
+
+<h4 id="chart-component">Chart Component</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import React from 'react';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
+import './chart.css'
+
+const Chart = props =&gt; {
+
+//important to distribute the data from the array into the array, not sure why it works like this
+let propTankData = [...props.chartData];
+
+
+  return (
+    &lt;LineChart width={800} height={300} data={propTankData}
+          margin=&gt;
+     &lt;XAxis dataKey="timeStamp"/&gt;
+     &lt;YAxis/&gt;
+     &lt;CartesianGrid strokeDasharray="3 3"/&gt;
+     &lt;Tooltip/&gt;
+     &lt;Legend /&gt;
+     &lt;Line type="monotone" dataKey="oil" stroke="#82ca9d" /&gt;
+     &lt;Line type="monotone" dataKey="water" stroke="blue" /&gt;
+    &lt;/LineChart&gt;
+  )
+}
+
+export default Chart
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 23rd 2019</h2>
+      <p><p>Today was an office day for me, but I was able to put in a couple hours of coding in between tasks. Our company was approached by an oilfield company needing a webapp that can display information about their tanks in the field. They want a line graph representation of tank levels for the past 30 days.</p>
+
+<p>I looked into D3 as I have some experience with it, but it is a little convoluted and not straightforward, which we need for others besides me not familiar with javascript to be able to continue this project once I am gone.</p>
+
+<p>I found Recharts, which is a nice npm module for react that uses d3 on the backend. It includes a good amount of seemingly easy to use components to create charts and graphs out of data, rendering updates in real time.</p>
+
+<p>The data structure will look like this:</p>
+
+<p>Well in Field –&gt; HMI (attached to well) –&gt; server –&gt; convert to database –&gt; data delivered to web app</p>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 22nd 2019</h2>
+      <p><p>Today I worked more on the watch and code exercise of creating a nested todos app. I was able to render the basics of it using only javascript and jquery to get DOM elements.</p>
+
+<h3 id="issues-i-am-having">Issues I am having</h3>
+<ol>
+  <li>Getting the nested UL + LIs to render in the correct order.
+Right now nested LIs render before their parent. Not sure how to fix this yet.
+<img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/nested-todos-example.png" alt="Nested UI/LI Error" /></li>
+</ol>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s2">"#todos"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">todosParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">));</span>
+  <span class="nx">todoInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">todos</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//recursively builds html to append to #todos UL</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">a</span> <span class="o">&lt;</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">a</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">todo</span> <span class="o">=</span> <span class="nx">todos</span><span class="p">[</span><span class="nx">a</span><span class="p">];</span>
+      <span class="c1">//builds up the inner arrays if subTodo exists</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">b</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">subTodo</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">[</span><span class="nx">b</span><span class="p">];</span>
+          <span class="c1">//if this is the beginning of a subTodo array, add &lt;ul&gt; to the front</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="s1">'&lt;ul&gt;'</span>
+          <span class="p">}</span>
+          <span class="c1">//if this is the end of a subTodo array, add &lt;/ul&gt; to the back</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">b</span> <span class="o">==</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">subTodo</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;/ul&gt;'</span>
+          <span class="p">}</span>
+          <span class="c1">//this this isnt the beg or end, return an &lt;li&gt; from todoparser</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">subTodo</span><span class="p">)</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">html</span> <span class="o">+=</span> <span class="nx">todosParser</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">html</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">completed</span> <span class="p">?</span> <span class="s2">"class='todo completed'"</span> <span class="p">:</span> <span class="s2">"class='todo'"</span>
+    <span class="kd">let</span> <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s2">`&lt;button id="complete-todo"&gt;`</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`(*)&lt;/button&gt;`</span>
+      <span class="c1">//only inserts button IF subTodos are all complete or non-existant</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">e</span><span class="o">=&gt;</span><span class="nx">e</span><span class="p">.</span><span class="nx">completed</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">subTodos</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">completeTodoButton</span> <span class="o">+=</span> <span class="s2">`()&lt;/button&gt;`</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">completeTodoButton</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span>
+    <span class="s2">`&lt;li id="</span><span class="p">${</span><span class="nx">todos</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">" </span><span class="p">${</span><span class="nx">completed</span><span class="p">}</span><span class="s2">&gt;`</span> <span class="o">+</span>
+      <span class="s2">`</span><span class="p">${</span><span class="nx">completeTodoButton</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">todos</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">`</span> <span class="o">+</span>
+      <span class="s2">`&lt;button id="delete-todo-btn"&gt;remove&lt;/button&gt;`</span> <span class="o">+</span>
+      <span class="s2">`&lt;button id="add-sub-todos-btn"&gt;add sub-todos&lt;/button&gt;`</span> <span class="o">+</span>
+    <span class="s2">`&lt;/li&gt;`</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ol>
+  <li>Error when trying to add a nested todo to an already nested todo
+My addSubTodo and findTodo functions are the ones at play in this case
+```
+function findTodo(e) {
+  let targetId = e.target.parentElement.id;
+  let todoToAddSubTo = todos.filter(e =&gt; e.id == targetId)[0];
+  let todoIndex = todos.indexOf(todoToAddSubTo);
+  return todos[todoIndex]
+}</li>
+</ol>
+
+<p>function findTodo(e){</p>
+
+<p>}</p>
+
+<p>function addSubTodo(e){
+  let todo = findTodo(e);
+  todo.subTodos.push({
+    id: uid(),
+    title: todoInput.value,
+    completed: false,
+    subTodos: [],
+  })
+  store(‘stored-todos’, todos);
+  render(todos);
+  $(“#todo-input”).focus()
+}
+```</p>
+
+<h3 id="build-your-own-framework">Build Your Own Framework</h3>
+<p>Purchased a recommended book from Gordon of watch and code. The book details a step by step process of how to create your own version of a popular javascript library. It is to be used to better understand JS as a whole and on a deeper aspect, not to learn the library.</p>
+
+<p>Began working through the first chapter and its exercises. I really enjoy the depth and the authors communication.</p>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 21st 2019</h2>
+      <p><p>Today I worked mostly on the last two ‘beast’ exercises from <a href="https://watchandcode.com/">watch and code premium.</a> I spent a lot of time in the debugger with this one, but I finally got it. I essentially split the number given to the function into a ‘left’ and ‘right’ side of the decmial.</p>
+
+<h4 id="rewrite-accounting-js-tofixed-method-using-only-string-manipulation">Rewrite Accounting JS toFixed() method using only string manipulation</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myToFixed</span><span class="p">(</span><span class="nx">number</span><span class="p">,</span><span class="nx">precision</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">numToStr</span> <span class="o">=</span> <span class="nx">number</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="c1">//checks to see if number was passed with a decimal</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">numToStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'.'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">numToStr</span> <span class="o">=</span> <span class="nx">numToStr</span> <span class="o">+</span> <span class="s1">'.0'</span>
+    <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">numToStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">let</span> <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">numToStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="kd">let</span> <span class="nx">preciseNumber</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+
+  <span class="c1">//handles right side of decimal place if its length is greater than the precision</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">rightSide</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">precision</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//addes an additional number to the right side, to round the precision number up or down</span>
+    <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">precision</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="c1">//defines the last number (rightSideLeft) and the</span>
+    <span class="c1">//number to use to round the last number up or down (rightSideRight)</span>
+    <span class="kd">let</span> <span class="nx">numToRound</span><span class="o">=</span> <span class="nx">rightSide</span><span class="p">[</span><span class="nx">rightSide</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="kd">let</span> <span class="nx">rounder</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">[</span><span class="nx">rightSide</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1">//if rounder is greater than 4 increase numToRound by 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">rounder</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">numToRound</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">numToRound</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">numToRound</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">numToRound</span><span class="p">)).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// create the new 'rightSide' of the decimal and add</span>
+    <span class="c1">// the rounded number as the last element</span>
+    <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">precision</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nx">concat</span><span class="p">([</span><span class="nx">numToRound</span><span class="p">]).</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+    <span class="c1">//add the left and ride side with a '.' between them to</span>
+    <span class="c1">//give the rounded number back to user</span>
+    <span class="nx">preciseNumber</span> <span class="o">=</span> <span class="nx">leftSide</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="nx">rightSide</span>
+  <span class="c1">//if the right side is less than the precision number pad with '0s'</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">padding</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">precision</span> <span class="o">-</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">rightSide</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">padding</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">preciseNumber</span> <span class="o">=</span> <span class="nx">leftSide</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="nx">rightSide</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">preciseNumber</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="nested-todo-app">Nested ‘Todo’ App</h4>
+<p>I am currently in the process of solving this one. I used vanillaJS, jquery (just for dom manipulation), and Handlebars (for rendering). I got the main part of it down, now I am just trying to figure out how to render the nested arrays.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var todoInput = document.getElementById("todo-input");
+$("#add-todo-btn").on('click',addTodo)
+$("#todos").on('click','#delete-todo-btn', deleteTodo)
+$("#todos").on('click', '#complete-todo', toggleTodo)
+$('.filter').on('change', filterTodos)
+$('.footer').on('click','.clear-completed',clearCompleted)
+$('#todos').on('click',"#add-sub-todos-btn", addSubTodo)
+
+
+var todos = store('stored-todos');
+
+var templateSource = $('#todo-template').html();
+var template = Handlebars.compile(templateSource);
+var footerTemplateSource = $('#footer-template').html();
+var footerTemplate = Handlebars.compile(footerTemplateSource);
+
+function addTodo(){
+  todos.push({
+    id: uid(),
+    title: todoInput.value,
+    completed: false,
+  })
+  store('stored-todos', todos);
+  render(todos);
+  $("#todo-input").focus()
+}
+
+function findTodo(e) {
+  let targetId = e.target.parentElement.dataset.id;
+  let todoToAddSubTo = todos.filter(e =&gt; e.id == targetId)[0];
+  let todoIndex = todos.indexOf(todoToAddSubTo);
+  return todos[todoIndex]
+}
+
+function addSubTodo(e){
+  let todo = findTodo(e);
+  if (todo.subTodos) {
+  todo.subTodos.push({
+    id: uid(),
+    title: todoInput.value,
+    completed: false,
+  })
+} else {
+  todo.subTodos = [];
+  todo.subTodos.push({
+    id: uid(),
+    title: todoInput.value,
+    completed: false,
+  })
+}
+  store('stored-todos', todos);
+  render(todos);
+  $("#todo-input").focus()
+}
+
+function deleteTodo(e) {
+  let id = e.target.parentElement.dataset.id
+  todos = todos.filter(e =&gt; e.id != id)
+  store('stored-todos', todos);
+  render(todos);
+}
+
+function toggleTodo(e) {
+  let id = e.target.parentElement.dataset.id;
+
+  todos = todos.map((todo) =&gt; {
+    if (todo.id === id) {
+      todo.completed = !todo.completed;
+      return todo;
+    }
+    return todo;
+  })
+  store('stored-todos', todos);
+  render(todos);
+}
+
+function clearCompleted() {
+  todos = todos.filter(e =&gt; !e.completed);
+  store('stored-todos', todos);
+  render(todos)
+}
+
+function filterTodos(e){
+  console.log(e.target.value)
+  let filteredTodos;
+  if (e.target.value == "show-completed") {
+    filteredTodos = todos.filter(e =&gt; e.completed == true);
+  } else if (e.target.value == "show-all") {
+    filteredTodos = todos;
+  }
+  else {
+    filteredTodos = todos.filter(e =&gt; e.completed == false);
+  }
+  render(filteredTodos);
+}
+
+//taken from todoMVC
+function store(namespace, data) {
+  if (arguments.length &gt; 1) {
+    return localStorage.setItem(namespace, JSON.stringify(data));
+  } else {
+    var store = localStorage.getItem(namespace);
+    return (store &amp;&amp; JSON.parse(store)) || [];
+  }
+}
+
+function render(todos) {
+  $('#todos').html(template(todos));
+  todoInput.value = '';
+  renderFooter()
+}
+
+function renderFooter(){
+  let todoCount = todos.length;
+  let completedTodoCount = todos.filter(e =&gt; e.completed).length;
+  let incompleteTodoCount = todoCount - completedTodoCount;
+  let template = footerTemplate({
+    activeTodoCount: incompleteTodoCount,
+    completedTodos: completedTodoCount,
+  })
+  $(".footer").toggle(todoCount &gt; 0).html(template)
+
+}
+
+//taken fomr todoMVC
+function uid() {
+  /*jshint bitwise:false */
+  var i, random;
+  var uid = '';
+  for (i = 0; i &lt; 32; i++) {
+    random = Math.random() * 16 | 0;
+    if (i === 8 || i === 12 || i === 16 || i === 20) {
+      uid += '-';
+    }
+    uid += (i === 12 ? 4 : (i === 16 ? (random &amp; 3 | 8) : random)).toString(16);
+  }
+  return uid;
+}
+
+render(todos);
+
+</code></pre></div></div>
+
+<p>To take a break near the end of my coding day, I moved on to the next section in watch and code. I downloaded the underscore repository from Gordon’s github and began to read through the docs.</p>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 20th 2019</h2>
+      <p><p>Today I worked through most of the exercises in the ‘Beasts’ section of <a href="https://watchandcode.com/">Watch and Code</a>. I keep going back to this course when something im learning stumps me. I hope to finish up all of the exercises and videos by the end of next month. Once that’s done I’ll get back to the Udemy courses on Node/Mongo/React etc.</p>
+
+<h4 id="improving-run-with-debugger">Improving Run With Debugger</h4>
+<p>Rewrite runWithDebugger so it can take an optional array that contains any arguments you want to pass into the callback function.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">runWithDebugger</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">debugger</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">callback</span><span class="p">(...</span><span class="nx">array</span><span class="p">);}</span> <span class="p">{</span><span class="k">return</span> <span class="nx">callback</span><span class="p">();}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sayFullName</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span><span class="nx">last</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">first</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="nx">last</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">runWithDebugger</span><span class="p">(</span><span class="nx">sayFullName</span><span class="p">,</span> <span class="p">[</span><span class="s1">'gordon'</span><span class="p">,</span> <span class="s1">'zhu'</span><span class="p">]);</span> <span class="c1">// 'gordon zhu'</span>
+</code></pre></div></div>
+
+<h4 id="writing-a-library-system--creating-libraries-out-of-order">Writing a library system + creating libraries out of order</h4>
+<p>My solution to the exercise with tests is <a href="https://github.com/jordanvidrine/Watch-And-Code-LibraryTest">here</a></p>
+
+<p>Here is the example code for creating a library with dependencies (listed in an array). The library can be created with dependencies even before the dependencies have been loaded into the system.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(function(){
+  var libraryStorage = {}
+  function librarySystem(name,dependencies,callback) {
+    //if arguments is greater than one, run through the 'definition' secion to define a library
+    if (arguments.length &gt; 1) {
+      //if call includes dependencies
+      if (dependencies.length &gt; 0) {
+        //checks to see if the library includes these dependencies
+        if (dependencies.every(e=&gt;libraryStorage.hasOwnProperty(e))) {
+          //creates a map of the return values of each dependency
+          let dependenciesMap = dependencies.map(e =&gt; librarySystem(e));
+          //if it includes them, it creates a new library object w/ included info
+          libraryStorage[name] = {name: name,
+                                  library: callback(...dependenciesMap),
+                                  dependencies: [...dependencies]}
+        } else {
+          //if not, it stores the information in the library, but does not define the library return value yet
+          //it stores all of the information necessary to eventually run the callback and define itself
+          libraryStorage[name] = {name: name,
+                                  library: undefined,
+                                  dependencies: [...dependencies],
+                                  callback: callback}
+        }
+      } else {
+        //if call does not include dependencies, creates the basic library
+        libraryStorage[name] = {name: name,
+                                library:callback(),
+                                dependencies: [...dependencies]}
+      }
+    } else {
+      if (libraryStorage[name].library === undefined ) {
+        librarySystem(libraryStorage[name].name,libraryStorage[name].dependencies,libraryStorage[name].callback)
+      }
+      return libraryStorage[name].library
+    }
+  }
+  window.librarySystem = librarySystem;
+})()
+</code></pre></div></div>
+
+<h4 id="your-own-isprototypeof">Your Own isProtoTypeOf</h4>
+<p>Write a function, isPrototypeOf, that works just like Object.prototype.isPrototypeOf. Since your solution will be called as a function rather than a method, the way you use it will be slightly different, but the outcome should be the same.</p>
+
+<p>Obviously, don’t use Object.prototype.isPrototypeOf in your solution, but feel free to use other methods on Object.prototype.</p>
+
+<p>I used recursion and Object.getPrototypeOf() to do this. (a) is the prototype and (b) is the object to check if prototype(a) exists in. It will recursively go deeper until it reaches the bottom to compare to (a)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function isPrototypeOf(a,b) {
+  if (a == b) {
+  	return true
+  } else if (Object.getPrototypeOf(b) !== null) {
+    if (Object.getPrototypeOf(b) == null) {
+      return false
+    }
+  	return isPrototypeOf(a,Object.getPrototypeOf(b))
+  } else {
+  	return false;
+  }
+}
+
+var canine = {
+  bark: function() {
+    console.log('bark');
+  }
+};
+
+var dog = Object.create(canine);
+dog.fetch = function() {
+  console.log('fetch');
+};
+
+var myDog = Object.create(dog);
+var empty = Object.create(null);
+
+// These two lines are equivalent.
+dog.isPrototypeOf(myDog);  // native function returns true
+isPrototypeOf(dog, myDog); // your function does the same
+
+// These two lines, similarly should return the same thing.
+dog.isPrototypeOf(empty);  // native function returns false
+isPrototypeOf(dog, empty); // your function does the same
+
+// This should work too.
+Object.prototype.isPrototypeOf(myDog);  // native function returns true
+isPrototypeOf(Object.prototype, myDog); // your function does the same
+
+// Also make sure that your function will work for any number of prototype links.
+isPrototypeOf(canine, myDog) // true
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 17th 2019</h2>
+      <p><p>My schedule was all out of whack this week due to lots of financial meetings at work. That aside, I still got my coding hours in dispersed here and there.</p>
+
+<p>I finished up the exercises for Eloquent Javascript ch 6. And also read through Chapter 7. I will definitely have to re-read chapter 7. Although I understood most of it, another read through will solidify the concepts.</p>
+
+<h3 id="groups--your-own-symboliterator">Groups + Your Own Symbol.iterator</h3>
+<p>Make the Group class from the previous exercise iterable. Refer to the section about the iterator interface earlier in the chapter if you aren’t clear on the exact form of the interface anymore.</p>
+
+<p>If you used an array to represent the group’s members, don’t just return the iterator created by calling the Symbol.iterator method on the array. That would work, but it defeats the purpose of this exercise.</p>
+
+<p>It is okay if your iterator behaves strangely when the group is modified during iteration.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Group</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">}</span>
+
+    <span class="nx">add</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">delete</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">!==</span> <span class="nx">value</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">has</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kr">static</span> <span class="k">from</span><span class="p">(</span><span class="nx">object</span><span class="p">){</span>
+        <span class="kd">let</span> <span class="nx">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">values</span> <span class="k">of</span> <span class="nx">object</span><span class="p">){</span>
+            <span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">group</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">GroupIterator</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">group</span> <span class="o">=</span> <span class="nx">group</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+    <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">group</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="na">done</span><span class="p">:</span> <span class="kc">true</span><span class="p">}</span>
+
+        <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">group</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">]</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="nx">value</span><span class="p">,</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">Group</span><span class="p">.</span><span class="k">from</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// → a</span>
+<span class="c1">// → b</span>
+<span class="c1">// → c</span>
+</code></pre></div></div>
+
+<h3 id="borrowing-a-method">Borrowing a method</h3>
+
+<p>Earlier in the chapter I mentioned that an object’s hasOwnProperty can be used as a more robust alternative to the in operator when you want to ignore the prototype’s properties. But what if your map needs to include the word “hasOwnProperty”? You won’t be able to call that method anymore because the object’s own property hides the method value.</p>
+
+<p>Can you think of a way to call hasOwnProperty on an object that has its own property by that name?</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Fix this call
+//console.log(map.hasOwnProperty("one"));
+
+console.log(map.__proto__.hasOwnProperty("one"))
+// → true
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 15th 2019</h2>
+      <p><p>Going through Chapter 6 in Eloquent Javascript today. This is my second read through of the chapter and things are getting clearer and beginning to stick.</p>
+
+<p>Some things I’ve begun to solidify today are:</p>
+<ol>
+  <li>Classes</li>
+  <li>Prototypes</li>
+  <li>Overridding derived Prototypes</li>
+  <li>Polymorphism</li>
+</ol>
+
+<p>Some things I need to better solidify are</p>
+<ol>
+  <li>Symbols (Didnt even know they existed before this chapter)</li>
+  <li>Inheritance</li>
+</ol>
+
+<p>I ran the following code a couple of times through the chrome debugger and was able to understand it.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Matrix</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">height</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">width</span> <span class="o">+</span> <span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">x</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="kd">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">[</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">MatrixIterator</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">matrix</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span> <span class="o">=</span> <span class="nx">matrix</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="na">done</span><span class="p">:</span> <span class="kc">true</span><span class="p">};</span>
+
+    <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+                 <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+                 <span class="na">value</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">)};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrix</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="nx">value</span><span class="p">,</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Matrix</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">MatrixIterator</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">let</span> <span class="nx">matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">`value </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">,</span><span class="p">${</span><span class="nx">y</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="p">{</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">value</span><span class="p">}</span> <span class="k">of</span> <span class="nx">matrix</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// → 0 0 value 0,0</span>
+<span class="c1">// → 1 0 value 1,0</span>
+<span class="c1">// → 0 1 value 0,1</span>
+<span class="c1">// → 1 1 value 1,1</span>
+
+</code></pre></div></div>
+
+<p>I’ve learned through Gordon Zhu’s Watch and Code lessons that reading other people’s code, and reading more complex code than you can easily grasp is an excellent way to get better at programming.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<h3 id="a-vector-type">A vector type</h3>
+
+<p>Write a class Vec that represents a vector in two-dimensional space. It takes x and y parameters (numbers), which it should save to properties of the same name. Give the Vec prototype two methods, plus and minus, that take another vector as a parameter and return a new vector that has the sum or difference of the two vectors’ (this and the parameter) x and y values. Add a getter property length to the prototype that computes the length of the vector—that is, the distance of the point (x, y) from the origin (0, 0).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Vec {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    plus(vector) {
+        return new Vec(this.x + vector.x, this.y + vector.y)
+    }
+    minus(vector){
+        return new Vec(this.x - vector.x, this.y - vector.y)
+    }
+
+    get length(){
+        return Math.sqrt(((this.x)*(this.x))+((this.y)*(this.y)))
+    }
+}
+
+console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+// → Vec{x: 3, y: 5}
+console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+// → Vec{x: -1, y: -1}
+console.log(new Vec(3, 4).length);
+// → 5
+</code></pre></div></div>
+
+<h3 id="groups">Groups</h3>
+
+<p>The standard JavaScript environment provides another data structure called Set. Like an instance of Map, a set holds a collection of values. Unlike Map, it does not associate other values with those—it just tracks which values are part of the set. A value can be part of a set only once—adding it again doesn’t have any effect.</p>
+
+<p>Write a class called Group (since Set is already taken). Like Set, it has add, delete, and has methods. Its constructor creates an empty group, add adds a value to the group (but only if it isn’t already a member), delete removes its argument from the group (if it was a member), and has returns a Boolean value indicating whether its argument is a member of the group.</p>
+
+<p>Use the === operator, or something equivalent such as indexOf, to determine whether two values are the same.</p>
+
+<p>Give the class a static from method that takes an iterable object as argument and creates a group that contains all the values produced by iterating over it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Group {
+    constructor() {
+        this.group = [];
+    }
+    add(value) {
+        if (!this.has(value)) {
+        this.group.push(value);
+        }
+    }
+    delete(value) {
+        if (this.has(value)) {
+            this.group = this.group.filter(v =&gt; v !== value)
+        }
+    }
+    has(value) {
+        if (this.group.indexOf(value) !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    static from(object){
+        let group = new Group;
+        for (let values of object){
+            group.add(values);
+        }
+        return group;
+    }
+}
+
+let group = Group.from([10, 20]);
+console.log(group.has(10));
+// → true
+console.log(group.has(30));
+// → false
+group.add(10);
+group.delete(10);
+console.log(group.has(10));
+// → false
+</code></pre></div></div>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 14th 2019</h2>
+      <p><p>Got back to coding today after the weekend and an unexpected day of looking at financial spreadsheets for 6 hours straight yesterday. (My head was hurting)</p>
+
+<p>I finalized the form fill for the first section of the generator app. Once, next is clicked, the info in the form is ‘Saved’ to the page and a second section to fill out will pop up with more information to be saved. This was all super straight forward and not an issue at all to implement.</p>
+
+<h3 id="first-phase">First phase</h3>
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/quote-example.bmp" alt="quote" /></p>
+<h3 id="second-phase">Second Phase</h3>
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/quote-example-next.bmp" alt="quote-example-next" /></p>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 11th 2019</h2>
+      <p><p>Worked for a couple of hours on the Customer Quote App for my generator manager. I wrote some code to validate if the form was filled out as well as used an npm package (‘email-validator’) to validate the email address entered.</p>
+
+<p>Also worked on correctly displaying an error when the user has not completely filled out the form yet. (I will transition to a UI version of this, but for now I will stick with simple error messages.)</p>
+
+<h4 id="here-is-the-basic-unstyled-page-so-far">Here is the basic unstyled page so far.</h4>
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/power-gen-form.png" alt="Customer Quote App" /></p>
+
+<p>I am a little proud of writing these two functions:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">formValidator</span><span class="p">(){</span>
+
+  <span class="kd">let</span> <span class="nx">needsToBeCorrected</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="c1">//creates an array populated with each form field that is not properly filled out</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">info</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//email validator</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">info</span> <span class="o">===</span> <span class="s1">'email'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">validator</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">[</span><span class="nx">info</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="c1">//skip the 'isValid' info in the state</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">info</span> <span class="o">===</span> <span class="s1">'isValid'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">[</span><span class="nx">info</span><span class="p">]</span> <span class="o">===</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="c1">//tests to see if the array with form fields needing correction is 0</span>
+  <span class="c1">//which would mean the form is correctly filled out</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+      <span class="na">customerInfo</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">,</span>
+        <span class="nx">needsToBeCorrected</span><span class="p">,</span>
+        <span class="na">isValid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">}})</span>
+    <span class="c1">//if it needs correcting, save the state</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">needsToBeCorrected</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">customerInfo</span><span class="p">:</span> <span class="p">{</span>
+          <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">customerInfo</span><span class="p">,</span>
+          <span class="nx">needsToBeCorrected</span><span class="p">,</span>
+          <span class="na">isValid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="p">}})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The above function is run once ‘next’ is clicked. The following is rendered underneath the component if isValid remains false.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var warningError;
+if (this.state.customerInfo.isValid === false) {
+  warningError = this.state.customerInfo.needsToBeCorrected.reduce((acc,cur,idx,array) =&gt; {
+  if (idx &lt; array.length-1) {
+      acc = acc + '' + ' ' + cur + ',';return acc
+  } else {
+    return acc + ' ' + cur + '.' + ' Once corrected, try submitting again.';
+  }},'The following items need to be corrected:');
+} else {
+  warningError = '';
+}
+</code></pre></div></div>
+<p><img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/error-msg.png" alt="error-msg" /></p>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 10th 2019</h2>
+      <p><p>Another ‘Office Day’ for me. I usually cant get much coding done on these days, BUT the Generator Manager for the company asked me to code him up something.</p>
+
+<p>He needs a simple app that takes in customer information he or another employee will enter including:</p>
+<ol>
+  <li>Customer Information (Name, Phone, Location, Etc)</li>
+  <li>Type of Job Quote (Generator Installation, Maintenance Call, Electrical Construction)</li>
+  <li>If (Gen Install)</li>
+  <li>Generator Information (Brand, Model, Etc)</li>
+  <li>Warranty Info</li>
+  <li>Notes</li>
+  <li>Line Item of Project Costs</li>
+</ol>
+
+<p>Depending on the type of work, this form will generate a web page that will be formatted so that it prints out well on a page. The information will also be saved to a SQL database we have to keep track of customers.</p>
+
+<p>I created a repository for this project and installed React using create-react-app so I can work from work or home or away for that matter.</p>
+<h3 id="react-diagram">React Diagram</h3>
+<p>Here is a diagram I made to help me figure out the components I will need to create to get the basic part of this app working.
+<img src="https://github.com/jordanvidrine/coding-journey/blob/master/Daily%20Logs/files/React-Components.jpg" alt="diagram" /></p>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 9th 2019</h2>
+      <p><p>Today was an office day at my day job. On my breaks I looked more into github and how to create a repository using Git Bash on windows. I created the <a href="https://github.com/jordanvidrine/coding-journey">coding-journey</a> repository on my work pc and documented the work I completed on 5-8-19.</p>
+
+<p>I also learned how to clone a repository on my home computer, allowing me to update this log from whatever computer I am working from.</p>
+
+<h2 id="creating-repository">Creating Repository</h2>
+<ol>
+  <li>Create a new reposity on Github (do not initialize with README)</li>
+  <li>Using Git Bash, cd to the directory you want the repository to live in and initialize
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git init
+</code></pre></div>    </div>
+  </li>
+  <li>Add the files in your directory. (stages for the first commit)
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add .
+# Adds the files in the local repository and stages them for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
+</code></pre></div>    </div>
+  </li>
+  <li>Commit the files you’ve added
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit -m "First Commit"
+# Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
+</code></pre></div>    </div>
+  </li>
+  <li>Using the repository link from github, add it as the remote origin
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add origin remote repository URL
+# Sets the new remote
+$ git remote -v
+# Verifies the new remote URL
+</code></pre></div>    </div>
+  </li>
+  <li>Ready to push the changes
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push origin master
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="cloning-repository">Cloning Repository</h2>
+<ol>
+  <li>cd to the folder you want your repository directory to be created in and run
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone (repository url) [name for repository folder to create]
+##[name...] is optional if you want the folder to be named something different than the repository name
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="pushing--fetching">Pushing &amp; Fetching</h2>
+<ol>
+  <li>Pushing : After staging and comitting the files yo push run the following command:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin [branch goes here]
+</code></pre></div>    </div>
+  </li>
+  <li>Fetching: If you used git clone, you can fetch any edited or new files with the following:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin [branch goes here]
+</code></pre></div>    </div>
+  </li>
+</ol>
+</p>
+    </li>
+    
+    <li>
+      <h2>May 8th 2019</h2>
+      <p><p>Today I read through <a href="https://eloquentjavascript.net/05_higher_order.html">Chapter 5</a>of eloquent Javascript. It solidified a lot of the things about callbacks and higher-order functions in the udemy course I finished last month. I was able to solve the exercises at the end of the book without much struggle.</p>
+
+<h2 id="exercises">Exercises</h2>
+<h3 id="flattening">Flattening</h3>
+<p>I used the <em>reduce</em> method, combined with the <em>concat</em> method to “flatten” an array of arrays into a single array. The code did not call for anything complex, like nested arrays.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arrays</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">]]</span>
+<span class="c1">//ex. -&gt; [1,2,3,4,5,6]</span>
+
+<span class="nx">arrays</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="o">=&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">b</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<h3 id="your-own-loop">Your Own Loop</h3>
+<p>I used recursion to complete the task of creating my own looping function. Similar in operation to Javascripts own for loop.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">loop</span><span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">testFn</span><span class="p">,</span> <span class="nx">updateFn</span><span class="p">,</span><span class="nx">bodyFn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">testFn</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">bodyFn</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+        <span class="nx">loop</span><span class="p">(</span><span class="nx">updateFn</span><span class="p">(</span><span class="nx">val</span><span class="p">),</span><span class="nx">testFn</span><span class="p">,</span><span class="nx">updateFn</span><span class="p">,</span><span class="nx">bodyFn</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//loop(3, n =&gt; n &gt; 0, n =&gt; n - 1, console.log);</span>
+<span class="c1">// → 3</span>
+<span class="c1">// → 2</span>
+<span class="c1">// → 1</span>
+</code></pre></div></div>
+
+<h3 id="everything">Everything</h3>
+<p>I implemented an every function that takes an array and a predicate function and acts like Array.prototype.every</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myOwnEvery</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">test</span><span class="p">(</span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myOwnEvery</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">));</span>
+<span class="c1">// → true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myOwnEvery</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">));</span>
+<span class="c1">// → false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myOwnEvery</span><span class="p">([],</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">));</span>
+<span class="c1">// → true</span>
+</code></pre></div></div>
+
+<h3 id="dominant-writing-direction">Dominant Writing Direction</h3>
+<p>Using a supplied <a href="https://eloquentjavascript.net/code/scripts.js">SCRIPTS</a> object, which included over 100 writing scripts and their corresponding info like amount of characters, writing direction, and if it is a living or dead script; I created a function that when given a string of text, parses that text and runs through the SCRIPTS object to find out A) which script was most used in that line of text and B) the writing direction of the most used script.</p>
+
+<p>The dominant direction is the direction of a majority of the characters that have a script associated with them.</p>
+
+<p>My solution makes use of two functions discussed earlier in the chapter. <a href="https://eloquentjavascript.net/05_higher_order.html#h_qYzPQMwIvv">countBy()</a> and <a href="https://eloquentjavascript.net/05_higher_order.html#p_T2D/Ix5YaM">textScripts()</a></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">dominantDirection</span><span class="p">(</span><span class="nx">text</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">countBy</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="kr">char</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">script</span> <span class="o">=</span> <span class="nx">characterScript</span><span class="p">(</span><span class="kr">char</span><span class="p">.</span><span class="nx">codePointAt</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+        <span class="k">return</span> <span class="nx">script</span> <span class="p">?</span> <span class="nx">script</span><span class="p">.</span><span class="nx">direction</span> <span class="p">:</span> <span class="s2">"none"</span><span class="p">;</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">script</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">script</span><span class="p">.</span><span class="nx">name</span> <span class="o">!==</span> <span class="s2">"none"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">current</span><span class="p">,</span><span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">current</span><span class="p">.</span><span class="nx">count</span> <span class="o">&gt;</span> <span class="nx">next</span><span class="p">.</span><span class="nx">count</span> <span class="p">?</span> <span class="nx">current</span> <span class="p">:</span> <span class="nx">next</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">direction</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dominantDirection</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">));</span>
+<span class="c1">// → ltr</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dominantDirection</span><span class="p">(</span><span class="s2">"Hey, مساء الخير"</span><span class="p">));</span>
+<span class="c1">// → rtl</span>
+</code></pre></div></div>
+</p>
+    </li>
+    
+  </ul>
+</div>
 
   </body>
 </html>

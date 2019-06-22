@@ -1,5 +1,7 @@
 ---
 ---
+@import "github-style";
+
 //VARIABLE DECLARATIONS
 //bg color
 $bg: #f9fafc;
@@ -15,20 +17,9 @@ body {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  font-family: arial;
+  font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
-  margin: 0 0 15px 0;
-  color: $textColor;
-}
-
-a {
-  text-decoration: none;
-  color: $textColor;
-  margin: 0 5px 0 0;
-  font-weight: bold;
-}
 
 .current {
   color: rgba(59,155,211,0.7);
@@ -36,12 +27,24 @@ a {
 
 #title-nav {
   min-width: 225px;
+  h1 {
+    margin: 0 0 5px 0;
+    color: $textColor;
+  }
+  a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.5);
+    margin: 0 5px 0 0;
+    font-weight: bold;
+    font-size: 15px;
+  }
 }
 
 #posts {
   width: 70%;
-  h2{
+  h2 {
     margin: 0;
+    color: $textColor;
   }
   ul {
     margin: 0;
@@ -56,13 +59,13 @@ a {
       padding-left: 25px;
 
       p {
-        font-size: 20px;
-        width: 75%;
+        font-size: 13px;
+        text-indent: 25px;
         color: $textColor;
       }
       a {
         text-decoration: none;
-        color: $textColor;
+        color: $lightBlue;
       }
     }
   }

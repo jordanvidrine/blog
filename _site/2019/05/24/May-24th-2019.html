@@ -8,12 +8,19 @@
   <body>
     <nav>
   
+  
     <a href="/" >
       Home
     </a>
     
-    <a href="/blog.html" >
+  
+    <a href="/index.html" >
       Blog
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
     </a>
     
 </nav>
@@ -29,87 +36,88 @@
 <p>Here is a bit of the code:</p>
 
 <h4 id="main-app">Main App</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import React from 'react';
-import {Component} from 'react';
-import Tank from './components/Tank';
-import TankData from './data/TankData'
-import Chart from './components/Chart'
-import './app.css'
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      TankData: [...TankData]
-    }
-    this.generateRandomLevels = this.generateRandomLevels.bind(this)
-    this.JSONify = this.JSONify.bind(this);
-  }
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Tank</span> <span class="k">from</span> <span class="s1">'./components/Tank'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TankData</span> <span class="k">from</span> <span class="s1">'./data/TankData'</span>
+<span class="k">import</span> <span class="nx">Chart</span> <span class="k">from</span> <span class="s1">'./components/Chart'</span>
+<span class="k">import</span> <span class="s1">'./app.css'</span>
 
-  generateRandomLevels() {
-    let tanks = this.state.TankData;
-    let newTimeStamp = new Date().toString().split(' ').splice(0,5).join(' ');
-    tanks.forEach((tank) =&gt; {
-      //save history of current water levels
-      tank.history.push({water: tank.currentH20Percent, oil: tank.currentOilPercent, timeStamp: tank.timeStamp});
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">TankData</span><span class="p">:</span> <span class="p">[...</span><span class="nx">TankData</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">generateRandomLevels</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">generateRandomLevels</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">JSONify</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">JSONify</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
 
-        //randomize water levels
-        let randomWater = Math.floor(Math.random()*7)
-        if (Math.random() &gt; .5) {
-          if (tank.currentH20Percent + randomWater &lt;= 10) {
-            tank.currentH20Percent += randomWater;
-          }
-        } else {
-            if (tank.currentH20Percent - randomWater &gt;= 1) {
-              tank.currentH20Percent -= randomWater;
-            }
-          }
+  <span class="nx">generateRandomLevels</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">tanks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">newTimeStamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">).</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+    <span class="nx">tanks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">tank</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">//save history of current water levels</span>
+      <span class="nx">tank</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">water</span><span class="p">:</span> <span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span><span class="p">,</span> <span class="na">oil</span><span class="p">:</span> <span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span><span class="p">,</span> <span class="na">timeStamp</span><span class="p">:</span> <span class="nx">tank</span><span class="p">.</span><span class="nx">timeStamp</span><span class="p">});</span>
 
-        //randomize oil levels
-        let randomOil = Math.floor(Math.random()*10);
-        if (Math.random() &gt; .5) {
-          if (tank.currentOilPercent + randomOil &lt;= 85) {
-            tank.currentOilPercent += randomOil
-          }
-        } else {
-            if (tank.currentOilPercent - randomOil &gt;= 10) {
-              tank.currentOilPercent -= randomOil;
-            }
-          }
-      //save new date to 'tank.date'
-      tank.timeStamp = newTimeStamp;
-    });
-    //save state of water levels
-    this.setState({
-      TankData: [...tanks]
-    })
-  }
+        <span class="c1">//randomize water levels</span>
+        <span class="kd">let</span> <span class="nx">randomWater</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">+</span> <span class="nx">randomWater</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">+=</span> <span class="nx">randomWater</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">-</span> <span class="nx">randomWater</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">tank</span><span class="p">.</span><span class="nx">currentH20Percent</span> <span class="o">-=</span> <span class="nx">randomWater</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
 
-  JSONify(){
-    let dataJSON = JSON.stringify(this.state.TankData[0].history);
-    console.log(dataJSON)
-  }
+        <span class="c1">//randomize oil levels</span>
+        <span class="kd">let</span> <span class="nx">randomOil</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">+</span> <span class="nx">randomOil</span> <span class="o">&lt;=</span> <span class="mi">85</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">+=</span> <span class="nx">randomOil</span>
+          <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">-</span> <span class="nx">randomOil</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">tank</span><span class="p">.</span><span class="nx">currentOilPercent</span> <span class="o">-=</span> <span class="nx">randomOil</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="c1">//save new date to 'tank.date'</span>
+      <span class="nx">tank</span><span class="p">.</span><span class="nx">timeStamp</span> <span class="o">=</span> <span class="nx">newTimeStamp</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="c1">//save state of water levels</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">TankData</span><span class="p">:</span> <span class="p">[...</span><span class="nx">tanks</span><span class="p">]</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
 
-    render() {
+  <span class="nx">JSONify</span><span class="p">(){</span>
+    <span class="kd">let</span> <span class="nx">dataJSON</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">history</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dataJSON</span><span class="p">)</span>
+  <span class="p">}</span>
 
-      let tanks = this.state.TankData.map((tank) =&gt; {
-        return &lt;Tank tankInfo={tank} key={tank.tankName} /&gt;
-      })
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
 
-      return (
-        &lt;div className="App"&gt;
-          &lt;div className="tank-container"&gt;
-            {tanks}
-            &lt;button onClick={this.generateRandomLevels}&gt;Random&lt;/button&gt;
-            &lt;button onClick={this.JSONify}&gt;JSONIFY&lt;/button&gt;
-          &lt;/div&gt;
-          &lt;Chart chartData={this.state.TankData[0].history} /&gt;
-        &lt;/div&gt;
-      )
-    }
-  }
+      <span class="kd">let</span> <span class="nx">tanks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">tank</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Tank</span> <span class="nx">tankInfo</span><span class="o">=</span><span class="p">{</span><span class="nx">tank</span><span class="p">}</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">tank</span><span class="p">.</span><span class="nx">tankName</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">})</span>
 
-export default App;
+      <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"App"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"tank-container"</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="nx">tanks</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">generateRandomLevels</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Random</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">JSONify</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">JSONIFY</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Chart</span> <span class="nx">chartData</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">TankData</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">history</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
 </code></pre></div></div>
 
 <h4 id="tank-component">Tank Component</h4>

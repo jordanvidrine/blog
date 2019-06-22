@@ -128,9 +128,13 @@ body { background-color: #f9fafc; display: flex; flex-direction: row; justify-co
 
 .current { color: rgba(59, 155, 211, 0.7); }
 
-#title-nav { min-width: 225px; }
+#title-nav { margin: 0 0 0 15px; min-width: 225px; }
 #title-nav h1 { margin: 0 0 5px 0; color: #303235; }
 #title-nav a { text-decoration: none; color: rgba(0, 0, 0, 0.5); margin: 0 5px 0 0; font-weight: bold; font-size: 15px; }
+#title-nav img { width: 150px; height: 150px; margin: 15px 0 15px 0; border: 5px solid white; box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3); }
+#title-nav h3 { font-size: 20px; margin: 0; }
+#title-nav span { font-size: 12px; color: rgba(0, 0, 0, 0.5); margin: 0; }
+#title-nav p { font-size: 13px; max-width: 225px; color: rgba(0, 0, 0, 0.75); }
 
 #posts { width: 70%; }
 #posts h2 { margin: 0; color: #303235; }

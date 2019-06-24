@@ -142,7 +142,7 @@ body { background-color: #f9fafc; display: flex; flex-direction: row; justify-co
 #posts ul li { margin: 0 0 50px 0; border-left: 2px solid rgba(0, 0, 0, 0.2); padding-left: 25px; }
 #posts ul li p { font-size: 13px; text-indent: 25px; color: #303235; }
 #posts ul li a { text-decoration: none; color: #3b9bd3; }
-#posts ul li pre.highlight { padding: 15px; overflow: scroll; }
+#posts ul li pre { padding: 15px; overflow: scroll; }
 
 @keyframes ul-appear { 0% { opacity: 0; }
   50% { opacity: 0; }

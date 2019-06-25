@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 25th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+  
+    <a href="/" >
+      Home
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
+    </a>
+    
+</nav>
+
+    <h1>June 25th 2019</h1>
+
+<p>Continued my node/express work. I continued progress and created a ‘stock’ app. I used chart.js to render the stock data (for the past month) to the page. I plan on integrating 5 options (1 day, 1 week, 1 month, 3 months, YTD, and one year) for the user to choose to see.</p>
+
+<h4 id="here-is-a-screenshot-of-what-i-worked-on">Here is a screenshot of what I worked on:</h4>
+<p><img src="/assets/img/stocks-app-example.png" alt="Stock App Example" /></p>
+
+<h4 id="here-is-that-front-end-code">Here is that front-end code:</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//document elements</span>
+<span class="kd">var</span> <span class="nx">searchInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'stockSearch'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">searchSubmit</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'stockButton'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">stockPrice</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'stockPrice'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">dataUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'data'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">clear</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'clear'</span><span class="p">);</span>
+
+<span class="c1">//date information</span>
+<span class="kd">var</span> <span class="nx">today</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">currentDay</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getUTCDate</span><span class="p">()</span><span class="o">+</span><span class="s1">''</span><span class="p">;</span>
+<span class="nx">currentDay</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="p">?</span> <span class="nx">currentDay</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">+</span> <span class="nx">currentDay</span> <span class="p">:</span> <span class="nx">currentDay</span> <span class="o">=</span> <span class="nx">currentDay</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">currentMonth</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getUTCMonth</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="s1">''</span><span class="p">;</span>
+<span class="nx">currentMonth</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="p">?</span> <span class="nx">currentMonth</span> <span class="o">=</span> <span class="mi">0</span><span class="o">+</span><span class="nx">currentMonth</span> <span class="p">:</span> <span class="nx">currentMonth</span> <span class="o">=</span> <span class="nx">currentMonth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">currentYear</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getUTCFullYear</span><span class="p">()</span><span class="o">+</span><span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">prevYear</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getUTCFullYear</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">prevMonth</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getUTCMonth</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">todayString</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">currentYear</span><span class="p">}</span><span class="s2">-</span><span class="p">${</span><span class="nx">currentMonth</span><span class="p">}</span><span class="s2">-</span><span class="p">${</span><span class="nx">currentDay</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">prevYearString</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">prevYear</span><span class="p">}</span><span class="s2">-</span><span class="p">${</span><span class="nx">currentMonth</span><span class="p">}</span><span class="s2">-</span><span class="p">${</span><span class="nx">currentDay</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span><span class="s2">`</span>
+
+<span class="c1">//VARIABLES</span>
+<span class="kd">let</span> <span class="nx">currentStockPrice</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">daysHistory</span><span class="p">,</span><span class="nx">weeksHistory</span><span class="p">,</span><span class="nx">monthsHistory</span><span class="p">,</span><span class="nx">threeMonthsHistory</span><span class="p">,</span><span class="nx">yearToDateHistory</span><span class="p">,</span><span class="nx">yearsHistory</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">ctx</span><span class="p">,</span> <span class="nx">myChart</span><span class="p">;</span>
+
+<span class="c1">//COLORS</span>
+<span class="kd">const</span> <span class="nx">COLORS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#00e5a8'</span><span class="p">,</span> <span class="s1">'#00afe5'</span><span class="p">,</span> <span class="s1">'#00e535'</span><span class="p">,</span><span class="s1">'#0095e5'</span><span class="p">,</span> <span class="s1">'#6bb9e0'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">stockCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">//Chart Styling</span>
+<span class="nx">Chart</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nb">global</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">line</span><span class="p">.</span><span class="nx">borderWidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">Chart</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nb">global</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">line</span><span class="p">.</span><span class="nx">tension</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">Chart</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nb">global</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">getStockToday</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">stockCount</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">symbol</span> <span class="o">=</span> <span class="nx">searchInput</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'http://localhost:3000/stock?stock='</span><span class="p">;</span>
+<span class="c1">// Fetches based only on todays date with the Stock Ticker entered</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="o">+</span><span class="nx">symbol</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">stockPrice</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`&lt;span class="neg"&gt;"</span><span class="p">${</span><span class="nx">symbol</span><span class="p">}</span><span class="s2">" does not exist, please try another search.&lt;/span&gt;`</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">changeInPrice</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Number</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">price</span><span class="p">)</span> <span class="o">-</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">price_open</span><span class="p">)).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">percentIncOrDec</span> <span class="o">=</span> <span class="p">(</span><span class="nx">changeInPrice</span> <span class="o">/</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">price</span><span class="p">)).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">changeInPrice</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">changeInPrice</span> <span class="o">=</span> <span class="s2">`&lt;span class="pos"&gt;+ $</span><span class="p">${</span><span class="nx">changeInPrice</span><span class="p">}</span><span class="s2">&lt;/span&gt;`</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">changeInPrice</span> <span class="o">=</span> <span class="s2">`&lt;span class='neg'&gt;(-$</span><span class="p">${</span><span class="nx">changeInPrice</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span><span class="s1">''</span><span class="p">)}</span><span class="s2">)&lt;/span&gt;`</span>
+        <span class="p">}</span>
+          <span class="nx">stockPrice</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`&lt;span class='price'&gt;</span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> -  $</span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">price</span><span class="p">}</span><span class="s2">&lt;/span&gt; per share. &lt;span class="dayChange"&gt;Day Change: &lt;/span&gt;</span><span class="p">${</span><span class="nx">changeInPrice</span><span class="p">}</span><span class="s2"> (%</span><span class="p">${</span><span class="nx">percentIncOrDec</span><span class="p">}</span><span class="s2">)`</span>
+          <span class="nx">stockPrice</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'loaded'</span><span class="p">)</span>
+        <span class="c1">//stockPrice.innerHTML = `&lt;span class='price'&gt;$${data.data.price}&lt;/span&gt; per share. &lt;span class="dayChange"&gt;Day Change: &lt;/span&gt;${changeInPrice} (%${percentIncOrDec})`</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getStockHistory</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">stockCount</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">stockPrice</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'&lt;span class="neg"&gt;Only 5 Stock Quotes Allowed. Press "clear" and try again.&lt;/span&gt;'</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">let</span> <span class="nx">symbol</span> <span class="o">=</span> <span class="nx">searchInput</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">historyUrl</span> <span class="o">=</span> <span class="s1">'http://localhost:3000/stock-history?stock='</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">dateFrom</span> <span class="o">=</span> <span class="s2">`&amp;date_from=</span><span class="p">${</span><span class="nx">prevYearString</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">dateTo</span> <span class="o">=</span> <span class="s2">`&amp;date_to=</span><span class="p">${</span><span class="nx">todayString</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="nx">historyUrl</span><span class="o">+</span><span class="nx">symbol</span><span class="o">+</span><span class="nx">dateFrom</span><span class="o">+</span><span class="nx">dateTo</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">stockPrice</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`&lt;span class="neg"&gt;"</span><span class="p">${</span><span class="nx">symbol</span><span class="p">}</span><span class="s2">" does not exist, please try another search.&lt;/span&gt;`</span>
+      <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">dataHistory</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">history</span>
+        <span class="kd">let</span> <span class="nx">dataArray</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">item</span> <span class="k">in</span> <span class="nx">dataHistory</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">//the if only logging item, it returns the string name not the object at that string</span>
+          <span class="nx">dataArray</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">date</span><span class="p">:</span><span class="nx">item</span><span class="p">,...</span><span class="nx">dataHistory</span><span class="p">[</span><span class="nx">item</span><span class="p">]});</span>
+        <span class="p">}</span>
+        <span class="nx">yearsHistory</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">;</span>
+
+        <span class="nx">yearToDateHistory</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">firstOfYear</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">"2019-01-01"</span><span class="p">);</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">firstOfYear</span><span class="p">;</span>
+        <span class="p">})</span>
+
+        <span class="nx">threeMonthsHistory</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">threeMonthsAgo</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+          <span class="nx">threeMonthsAgo</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">today</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">threeMonthsAgo</span><span class="p">;</span>
+        <span class="p">})</span>
+
+        <span class="nx">monthsHistory</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">oneMonthAgo</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+          <span class="nx">oneMonthAgo</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">today</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span><span class="o">-</span><span class="mi">31</span><span class="p">);</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">oneMonthAgo</span><span class="p">;</span>
+        <span class="p">})</span>
+
+        <span class="nx">weeksHistory</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">oneWeekAgo</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+          <span class="nx">oneWeekAgo</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">today</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span><span class="o">-</span><span class="mi">7</span><span class="p">);</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">date</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">oneWeekAgo</span><span class="p">;</span>
+        <span class="p">})</span>
+        <span class="c1">//dataUl.innerHTML = renderList(yearToDateHistory);</span>
+        <span class="c1">//dataUl.classList.add('loaded')</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">myChart</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">//removeData(myChart);</span>
+          <span class="nx">addData</span><span class="p">(</span><span class="nx">myChart</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">label</span><span class="p">:</span> <span class="nx">searchInput</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+            <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">COLORS</span><span class="p">[</span><span class="nx">stockCount</span><span class="p">],</span>
+            <span class="na">borderColor</span><span class="p">:</span> <span class="nx">COLORS</span><span class="p">[</span><span class="nx">stockCount</span><span class="p">],</span>
+            <span class="na">data</span><span class="p">:</span> <span class="nx">monthsHistory</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">map</span><span class="p">((</span><span class="nx">element</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">close</span><span class="p">);</span>
+            <span class="p">}),</span>
+            <span class="na">fill</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="p">});</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">ctx</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'chart'</span><span class="p">)</span>
+            <span class="nx">myChart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">type</span><span class="p">:</span> <span class="s1">'line'</span><span class="p">,</span>
+          <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">labels</span><span class="p">:</span> <span class="nx">monthsHistory</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">map</span><span class="p">((</span><span class="nx">element</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+              <span class="k">return</span> <span class="nx">element</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'-'</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">+</span> <span class="nx">element</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'-'</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"-2019"</span><span class="p">;</span>
+            <span class="p">}),</span>
+            <span class="na">datasets</span><span class="p">:</span> <span class="p">[{</span>
+              <span class="na">label</span><span class="p">:</span> <span class="nx">searchInput</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+              <span class="na">data</span><span class="p">:</span> <span class="nx">monthsHistory</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">map</span><span class="p">((</span><span class="nx">element</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">close</span><span class="p">);</span>
+              <span class="p">}),</span>
+              <span class="na">borderColor</span><span class="p">:</span> <span class="nx">COLORS</span><span class="p">[</span><span class="nx">stockCount</span><span class="p">],</span>
+              <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">COLORS</span><span class="p">[</span><span class="nx">stockCount</span><span class="p">],</span>
+              <span class="na">fill</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="p">}],</span>
+          <span class="p">},</span>
+          <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">responsive</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">display</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="na">text</span><span class="p">:</span> <span class="s1">'Stock Prices'</span>
+            <span class="p">},</span>
+            <span class="na">tooltips</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">mode</span><span class="p">:</span> <span class="s1">'index'</span><span class="p">,</span>
+              <span class="na">intersect</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="na">hover</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">mode</span><span class="p">:</span> <span class="s1">'nearest'</span><span class="p">,</span>
+              <span class="na">intersect</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="na">scales</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">xAxes</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="na">display</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="na">scaleLabel</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="na">display</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                  <span class="na">labelString</span><span class="p">:</span> <span class="s1">'Time'</span>
+                <span class="p">}</span>
+              <span class="p">}],</span>
+              <span class="na">yAxes</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="na">display</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="na">scaleLabel</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="na">display</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                  <span class="na">labelString</span><span class="p">:</span> <span class="s1">'Stock Price'</span>
+                <span class="p">}</span>
+              <span class="p">}]</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+          <span class="p">}</span>
+
+        <span class="nx">stockCount</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">//HELPER FUNCTIONS</span>
+<span class="kd">function</span> <span class="nx">removeData</span><span class="p">(</span><span class="nx">chart</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">chart</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">addData</span><span class="p">(</span><span class="nx">chart</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="nx">chart</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">//EVENT LISTENERS</span>
+<span class="nx">searchSubmit</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">getStockToday</span><span class="p">();</span>
+  <span class="nx">getStockHistory</span><span class="p">();</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'chart-container'</span><span class="p">).</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">clear</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">removeData</span><span class="p">(</span><span class="nx">myChart</span><span class="p">);</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'chart-container'</span><span class="p">).</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">)</span>
+<span class="p">})</span>
+
+
+</code></pre></div></div>
+
+
+  </body>
+</html>

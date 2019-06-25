@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>June 24th 2019</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+  
+  
+    <a href="/" >
+      Home
+    </a>
+    
+  
+    <a href="https://www.linkedin.com/in/jordan-b-vidrine/" >
+      LinkedIn
+    </a>
+    
+</nav>
+
+    <h1>June 24th 2019</h1>
+
+<p>Started the day working on the second 100 days of css challenge and completed it. It took about an hour, but I really feel like I am already getting used to the css animations syntax. Got to play around with the clip path CSS as well which was fun. Here is the solution:</p>
+
+<p class="codepen" data-height="350" data-theme-id="light" data-default-tab="result" data-user="jordanvidrine" data-slug-hash="QXgNzj" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="100 Dats of CSS #2">
+  <span>See the Pen <a href="https://codepen.io/jordanvidrine/pen/QXgNzj/">
+  100 Dats of CSS #2</a> by Jordan Vidrine (<a href="https://codepen.io/jordanvidrine">@jordanvidrine</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async="" src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="nodeexpressapi-learning">Node/Express/API Learning</h3>
+
+<p>Started to try my hand at working with Node and Express on my own without a walkthrough or tutorial. It was a bit slow going but I got the hang of it after a couple of hours of noodling around. I was able to get a basic website up, establish to endpoints for an express app, and then request those endpoints from my front-end.</p>
+
+<h4 id="here-is-that-back-end-code">Here is that back-end code:</h4>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">)</span> <span class="c1">//lets you specify path directorys</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">hbs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'hbs'</span><span class="p">);</span> <span class="c1">//for partials</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">//path names</span>
+<span class="kd">const</span> <span class="nx">publicDirectoryPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../public'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">viewsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/views'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">partialsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../templates/partials'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">scriptsPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../node_modules/'</span><span class="p">)</span>
+
+<span class="c1">//specifies what directory to use for "/" get path</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">publicDirectoryPath</span><span class="p">))</span>
+
+<span class="c1">//specifies the scripts directory</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'/scripts'</span><span class="p">,</span> <span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">scriptsPath</span><span class="p">))</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'view engine'</span><span class="p">,</span> <span class="s1">'hbs'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'views'</span><span class="p">,</span> <span class="nx">viewsPath</span><span class="p">);</span>
+<span class="nx">hbs</span><span class="p">.</span><span class="nx">registerPartials</span><span class="p">(</span><span class="nx">partialsPath</span><span class="p">)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'Stock Info App'</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">getStock</span><span class="p">(</span><span class="nx">symbol</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">STOCK_URL</span> <span class="o">+</span> <span class="nx">symbol</span> <span class="o">+</span> <span class="nx">STOCK_KEY</span><span class="p">,</span> <span class="na">json</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="s1">'ERROR'</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">Message</span> <span class="o">||</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">Message</span> <span class="o">||</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+        <span class="nx">callback</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getStockHistory</span><span class="p">(</span><span class="nx">symbol</span><span class="p">,</span> <span class="k">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">STOCK_HISTORY_URL</span> <span class="o">+</span>
+    <span class="nx">symbol</span> <span class="o">+</span> <span class="nx">STOCK_KEY</span> <span class="o">+</span>
+    <span class="s2">`&amp;date_from=</span><span class="p">${</span><span class="k">from</span><span class="p">}</span><span class="s2">&amp;date_to=</span><span class="p">${</span><span class="nx">to</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="na">json</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="s1">'ERROR!'</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">Message</span> <span class="o">||</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">Message</span> <span class="o">||</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+          <span class="nx">callback</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/stock'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">stock</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="na">error</span><span class="p">:</span><span class="s1">'You must provide a stock symbol!'</span><span class="p">})</span>
+
+  <span class="nx">getStock</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">stock</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">error</span><span class="p">});</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/stock-history'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">stock</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="na">error</span><span class="p">:</span><span class="s1">'You must provide a stock symbol!'</span><span class="p">})</span>
+
+  <span class="nx">getStockHistory</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">stock</span><span class="p">,</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">date_from</span><span class="p">,</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">date_to</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">error</span><span class="p">});</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">,</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">});</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Server is up on port 3000'</span><span class="p">)</span>
+<span class="p">})</span>
+
+</code></pre></div></div>
+
+
+  </body>
+</html>

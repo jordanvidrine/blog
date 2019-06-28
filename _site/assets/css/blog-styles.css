@@ -157,4 +157,5 @@ body { background-color: #f9fafc; display: flex; flex-direction: row; justify-co
   #posts ul { margin: 25px 0 0 0; list-style: none; animation: ul-appear 1s ease-in forwards; display: flex; flex-direction: column; padding: 25px 0 0 0; border-top: 1px solid rgba(0, 0, 0, 0.2); }
   #posts ul li { margin: 0 0 25px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.2); border-left: none; padding: 0 0 25px 0; }
   #posts ul li p { font-size: 13px; text-indent: none; color: #303235; text-align: center; }
-  #posts ul li a { text-decoration: none; color: #3b9bd3; } }
+  #posts ul li a { text-decoration: none; color: #3b9bd3; }
+  #posts ul li img { width: 90%; } }

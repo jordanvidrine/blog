@@ -1,0 +1,29 @@
+---
+layout: blog
+pagination:
+  enabled: true
+---
+<div id="posts">
+  <ul>
+    {% for post in paginator.posts %}
+    <li>
+      <h2>{{post.title}}</h2>
+      <p>{{post.excerpt}}</p>
+      {% if post.content contains '<!--more-->'%}
+      <a id='read-more' href="{{post.url}}#posts">Read More...</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% if paginator.total_pages > 1 %}
+  <div id='pagination'>
+  {% if paginator.previous_page %}
+    <a id='newer' href="{{ paginator.previous_page_path | prepend: site.baseurl }}">< Newer Posts</a>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a id ='older' href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older Posts ></a>
+  {% endif %}
+  </div>
+  {% endif %}
+  {% include footer.html %}
+</div>

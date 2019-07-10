@@ -1,9 +1,4 @@
----
 excerpt_separator: <!--more-->
----
-collections:
-  authors:
-    output: true
 
 defaults:
   - scope:
@@ -22,3 +17,19 @@ defaults:
       layout: "default"
 
 highlighter: rouge
+
+gems:
+  - jekyll-paginate-v2
+
+# Pagination Settings
+pagination:
+  enabled: true
+  per_page: 10
+  permalink: '/page/:num/'
+  title_suffix: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
+# Produces a cleaner folder structure when using categories
+permalink: /:year/:month/:title.html

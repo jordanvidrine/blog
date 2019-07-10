@@ -1,3 +1,297 @@
 ---
 ---
 @import "main";
+@import "github-style";
+
+//VARIABLE DECLARATIONS
+//bg color
+$bg: #f9fafc;
+$textColor: #303235;
+$redOrange: #e95a33;
+$lightBlue: #3b9bd3;
+$pink: #f4b6b3;
+$yellow: #fce752;
+
+body  {
+  background-color: #f9fafc;
+  color: #303235;
+  font-family: 'Cabin', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0
+}
+
+#blogging-mobile {
+  display: none;
+}
+
+p:nth-of-type(1) {
+}
+
+#bio {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  margin: 50px 0 0 0;
+}
+
+#bio img {
+  width: 150px;
+  border: 5px solid white;
+  box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+  height: 150px;
+  margin: 0 0 0 25px;
+}
+
+#example-header {
+  margin: 25px 0 15px 0;
+  text-align: center;
+}
+
+hr {
+  display: none;
+}
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #3b9bd3;
+}
+
+#projects {
+  margin: 25px 0 0 0;
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+}
+
+  #projects section.project {
+    margin: 0 0 25px 0;
+    padding: 25px 0 25px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #projects section.project section.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 55%;
+    padding: 0 25px 0 25px;
+  }
+  #projects section.project section.preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+  }
+
+  section.preview img {
+    border: 5px solid white;
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+  }
+
+  #projects p {
+    font-size: 13px;
+    margin: 0 0 5px 0;
+  }
+
+.odd {
+  background-color: rgba(0,0,0,0.05);
+}
+
+h1 {
+  font-size: 40px;
+  margin: 0 0 0 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 15px 0;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  margin: 0 0 15px 0;
+}
+
+p {
+  margin: 0;
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+span {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(48,50,53,.8)
+}
+
+// JOURNAL ENTRY STYLES
+
+#posts {
+  background-color: white;
+  width: 100%;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-top: 25px;
+
+  footer {
+    border-top: solid 1px rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.8);
+    padding: 15px 0 15px 0;
+    p {
+      color: rgba(255,255,255,0.75);
+      position: relative;
+      text-align: center;
+      }
+    }
+
+  #journal-title {
+    text-align: center;
+    margin: 0 0 25px 0;
+   }
+
+  ul {
+    margin: 0 !important;
+    padding: 0 15% 0 15%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      margin: 0 0 50px 0;
+
+      p {
+        font-size: 13px;
+        color: $textColor;
+      }
+      a {
+        text-decoration: none;
+        color: $lightBlue;
+      }
+      pre {
+        padding: 15px;
+        overflow:scroll;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px ) {
+
+  #bio {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 25px 0 0 0;
+  }
+
+  #blog {
+    display: none;
+  }
+
+  #blogging-mobile {
+    display: block;
+    font-size: 16px;
+    padding: 10px 25px;
+    background-color: white;
+    border-radius: 3px;
+    margin: 10px 0 0 0;
+    border: 1px solid rgba(0,0,0,0.1);
+
+  }
+
+  #blogging-mobile:hover {
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.05);
+    cursor: pointer;
+  }
+
+  #bio p {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  #bio img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+    margin: 0 0 15px 0;
+  }
+
+  hr {
+    display: block;
+    width: 90%;
+    border: .5px solid rgba(0,0,0,0.2);
+    margin: 25px 0 0 0;
+    vertical-align: center;
+    align-self: center;
+  }
+
+  #projects {
+    width: 100%;
+    margin: 25px 25px 0 25px;
+  }
+    #projects section.project {
+      padding: 25px 0 25px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+    }
+
+      #projects section.project section.info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0 0 20px 0;
+      width: 90%;
+    }
+
+      #projects section.project section.preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+    }
+
+      #projects section.web-design {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+    span {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(48,50,53,.8)
+    }
+
+    #posts {
+
+      ul {
+        padding: 0 25px 0 25px;
+      }
+    }
+}

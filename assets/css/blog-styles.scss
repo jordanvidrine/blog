@@ -29,7 +29,8 @@ body {
 #title-nav {
   margin: 0 0 0 15px;
   padding-top: 15px;
-  min-width: 225px;
+  min-width: 200px;
+
   h1 {
     margin: 0 0 5px 0;
     color: $textColor;
@@ -59,15 +60,15 @@ body {
   }
   p {
     font-size: 13px;
-    max-width: 225px;
+    max-width: 200px;
     color: rgba(0,0,0,0.75);
   }
 }
 
 #posts {
-  width: 100%;
+  width: 85%;
   height: 100%;
-  margin: 0 0 0 50px;
+  margin: 0 0 0 35px;
   padding-top: 15px;
   border-left: 1px solid rgba(0,0,0,0.075);
   background-color: white;

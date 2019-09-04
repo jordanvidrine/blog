@@ -11,6 +11,11 @@ $lightBlue: #3b9bd3;
 $pink: #f4b6b3;
 $yellow: #fce752;
 
+html {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   background-color: $bg;
   display: flex;
@@ -27,7 +32,7 @@ body {
 #title-nav {
   margin: 0 0 0 15px;
   padding-top: 15px;
-  min-width: 225px;
+  min-width: 200px;
   h1 {
     margin: 0 0 5px 0;
     color: $textColor;

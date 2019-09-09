@@ -1,5 +1,6 @@
 ---
 layout: post
+date: '2019-08-20 11:00:00'
 ---
 Last week and today I continued to work on the static site generator (InGen). Today I added the ability to add blog posts by saving markdown files inside of a ```/post``` directory inside of ```/content```. It's been nice to take a break from tutorials and focus on getting this project to work in the ways that I want it to.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-date: '2019-08-20 12:00:00'
+date: '2019-09-09 12:00:00'
 ---
 I am in the last section of the node course I have been working through for the past two months. This section deals with using socket.io and a building simple chat messaging app.
 

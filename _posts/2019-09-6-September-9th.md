@@ -36,6 +36,7 @@ In my ```index.html``` I have added the following (the location button is from a
   <script src="/js/chat.js"></script>
 </body>
 ```
+<!--more-->
 This is the basic template we will be using to send/recieve and render messages to and from other clients.
 
 On the sever side js we have the following along with our boilerplate express js code (notice we used http and express in order to pass the server into the socketio() function):

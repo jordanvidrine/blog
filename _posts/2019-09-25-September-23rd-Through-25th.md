@@ -1,7 +1,14 @@
 ---
 layout: post
 ---
-I started the week off with a phone call with a potential employer. The conversation went well and I ended up being given a coding assessment to see how my skills lined up with the job requirements. So this week for my coding time, instead of going through any course work, I created the app required by the assessment. I created the app using React. The following is a general break down of the app and assessment requirements.
+I started the week off with a phone call with a potential employer. The conversation went well and I ended up being given a coding assessment to see how my skills lined up with the job requirements. So this week for my coding time, instead of going through any course work, I created the app required by the assessment using React. The following is a general break down of the app and assessment requirements.
+
+## Site Example
+[Click Here To View](https://jbv-giphy.herokuapp.com) the live site. You can view the code [here](https://github.com/jordanvidrine/Giphy-App).
+
+<img src="/assets/img/giphy-2.jpg" alt="giphy-site" width="600px">
+
+<!--more-->
 
 # Front-end Candidate Assignment
 You are building a GIF picker that allows users to search for a GIF and copy or share it
@@ -15,8 +22,6 @@ to their favorite chat program. It should use GIPHY's API to generate GIFs. The 
 - Use your modern UI framework of choice Aurelia/React/Vue/etc.
 - An AJAX/Fetch library as well as a utility library for things like encoding query parameters or debouncing/throttling is acceptable. No other libraries or plugins are acceptable.
 - A publicly available URL where the app will live through a service like now,  netlify , surge, codepen, glitch, or similar.
-
-<!--more-->
 
 ### Features
 Features are listed in priority, some are more difficult than others. Accomplish as many as you feel comfortable.

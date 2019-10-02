@@ -1,8 +1,10 @@
+.highlight {
+  background-color: rgba(0,0,0,0.05);
+}
+
 .highlight pre, pre, .highlight .hll { background-color: #f8f8f8; border: 1px solid #ccc; padding: 6px 10px; border-radius: 3px; }
 .highlight .c { color: #999988; font-style: italic; }
-.highlight .err { color: #a61717; background-color: #e3d2d2; }
 .highlight .k { font-weight: bold; }
-.highlight .o { font-weight: bold; }
 .highlight .cm { color: #999988; font-style: italic; }
 .highlight .cp { color: #999999; font-weight: bold; }
 .highlight .c1 { color: #999988; font-style: italic; }
@@ -20,7 +22,7 @@
 .highlight .gu { color: #800080; font-weight: bold; }
 .highlight .gt { color: #aa0000; }
 .highlight .kc { font-weight: bold; }
-.highlight .kd { font-weight: bold; }
+.highlight .kd { font-weight: bold; color: rgb(102, 91, 158) }
 .highlight .kn { font-weight: bold; }
 .highlight .kp { font-weight: bold; }
 .highlight .kr { font-weight: bold; }

@@ -61,7 +61,7 @@ body {
     margin: 0;
   }
   p {
-    font-size: 13px;
+    font-size: 15px;
     max-width: 225px;
     color: rgba(0,0,0,0.75);
   }
@@ -74,8 +74,15 @@ body {
   padding: 15px 50px;
   border-left: 1px solid rgba(0,0,0,0.075);
 
+  blockquote {
+    background-color: rgba(0,0,0,0.05);
+    padding: 15px;
+    border-left: 4px solid rgba(0,0,0,0.1)
+  }
+
   #content {
     width: 90%;
+    min-height: 100vh;
     list-style: none;
     animation: ul-appear 1s ease-in forwards;
     padding: 25px 0 25px 0;
@@ -86,7 +93,7 @@ body {
     color: $textColor;
   }
   p {
-    font-size: 15px;
+    font-size: 17px;
     color: $textColor;
   }
   img {
@@ -186,6 +193,7 @@ footer  {
       color: $textColor;
       text-align: left;
     }
+
     #content {
       width: 90%;
       margin: 0 auto 0 auto;

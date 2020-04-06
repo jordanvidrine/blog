@@ -33,15 +33,20 @@ p:nth-of-type(1) {
 #bio {
   display: flex;
   flex-direction: row;
-  width: 600px;
+  width: 50%;
   margin: 50px 0 50px 0;
 }
 
+.bio-description {
+  font-size: 16px;
+}
+
 #bio img {
-  height: 150px;
+  height: 175px;
   border: 5px solid white;
+  border-radius: 50%;
   box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
-  margin: 0 0 0 25px;
+  margin: 20px 0 0 50px;
 }
 
 #example-header {
@@ -96,7 +101,7 @@ a {
   }
 
   #projects p {
-    font-size: 13px;
+    font-size: 16px;
     margin: 0 0 5px 0;
   }
 
@@ -171,7 +176,7 @@ span {
       margin: 0 0 50px 0;
 
       p {
-        font-size: 13px;
+        font-size: 16px;
         color: $textColor;
       }
       a {
@@ -221,20 +226,6 @@ span {
   #blogging-mobile:hover {
     box-shadow: 0 0 1px 1px rgba(0,0,0,0.05);
     cursor: pointer;
-  }
-
-  #bio p {
-    font-size: 13px;
-    text-align: center;
-  }
-
-  #bio img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 5px solid white;
-    box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
-    margin: 0 0 15px 0;
   }
 
   hr {

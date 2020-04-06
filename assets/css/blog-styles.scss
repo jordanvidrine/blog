@@ -59,7 +59,7 @@ body {
     margin: 0;
   }
   p {
-    font-size: 13px;
+    font-size: 15px;
     max-width: 200px;
     color: rgba(0,0,0,0.75);
   }
@@ -72,6 +72,13 @@ body {
   padding-top: 15px;
   border-left: 1px solid rgba(0,0,0,0.075);
   background-color: white;
+
+  blockquote {
+    background-color: rgba(0,0,0,0.05);
+    padding: 15px;
+    border-left: 4px solid rgba(0,0,0,0.1)
+  }
+
   h2 {
     margin: 0;
     color: $textColor;
@@ -91,7 +98,7 @@ body {
       padding: 0 35px;
 
       p {
-        font-size: 15px;
+        font-size: 16px;
         color: $textColor;
       }
       a {
